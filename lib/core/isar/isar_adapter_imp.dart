@@ -3,8 +3,7 @@ import 'dart:async';
 import 'package:db_adapter_flutter/core/db_core.dart';
 import 'package:isar/isar.dart';
 
-import 'isar_dao/isar_collaborator_dao_ex.dart';
-import 'isar_dao/reactions_dao.dart';
+import 'isar_dao/notes_dao.dart';
 
 class IsarAdapterImp implements ICarbonAdapter<int> {
   IsarAdapterImp._(this._db);
@@ -23,8 +22,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
           final dbInstance = await Isar.open(
             name: name,
             [
-              IsarCollaboratorDAOSchema,
-              ISarReactionsDAOSchema,
+              IsarNotesDAOSchema,
             ],
             inspector: true,
           );
@@ -54,13 +52,13 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   // how to improve this identifier for objects
   // can I do with the DTO
   final _isarObjects = {
-    'collaborator': IsarCollaboratorDAO.fromMap,
-    'reaction': ISarReactionsDAO.fromMap,
+    'collaborator': IsarNotesDAO.fromMap,
+    'reaction': IsarNotesDAO.fromMap,
   };
 
   IsarCollection? getTableByString(String table) {
-    if (table == (IsarCollaboratorDAO).toString()) {
-      return _db.isarCollaboratorDAOs;
+    if (table == (IsarNotesDAO).toString()) {
+      return _db.isarNotesDAOs;
     }
 
     throw Exception('The type is not supported');

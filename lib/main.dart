@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:db_adapter_flutter/core/sembast/sembast_adapter_imp.dart';
 import 'package:flutter/material.dart';
 
 import 'pages/home_page.dart';
@@ -7,7 +6,6 @@ import 'pages/home_page.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await SembastAdapterImp.initAdapter('database');
   runApp(const MyApp());
 }
 
