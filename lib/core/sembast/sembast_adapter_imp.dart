@@ -26,10 +26,10 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
 
   static bool get wasInitCalled => _sembast != null;
 
-  static Future<SembastAdapterImp> initAdapter(
-    String name, [
+  static Future<SembastAdapterImp> initAdapter({
+    String name = 'sembast_default_name',
     int version = 1,
-  ]) async {
+  }) async {
     if (_completer == null) {
       final Completer<SembastAdapterImp> completer = Completer<SembastAdapterImp>();
       try {

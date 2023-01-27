@@ -14,8 +14,7 @@ class CollectionLocalRepositoryExampleIsar with CarbonSingleDataSourceMixin<Isar
   String get tableName => 'collaborator';
 
   @override
-  fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+  CollaboratorDTO fromJson(Map<String, dynamic> json) {
+    return CollaboratorDTO.fromJson(json);
   }
 }

@@ -13,7 +13,9 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
 
   static Completer<IsarAdapterImp>? _completer;
 
-  static Future<IsarAdapterImp> initAdapter(String name) async {
+  static Future<IsarAdapterImp> initAdapter({
+    String name = 'sembast_default_name',
+  }) async {
     if (_completer == null) {
       final Completer<IsarAdapterImp> completer = Completer<IsarAdapterImp>();
       try {

@@ -3,9 +3,9 @@ import 'package:db_adapter_flutter/data_layer/core_db/mixin_single_data_source.d
 
 import '../dto/collaborator_dto.dart';
 
-class CollectionLocalRepositoryExampleIsar with CarbonSingleDataSourceMixin<SembastAdapterImp, CollaboratorDTO> {
+class CollectionLocalRepositoryExampleSembast with CarbonSingleDataSourceMixin<SembastAdapterImp, CollaboratorDTO> {
   /// default constructor
-  const CollectionLocalRepositoryExampleIsar(this.adapterDb);
+  const CollectionLocalRepositoryExampleSembast(this.adapterDb);
 
   @override
   final SembastAdapterImp adapterDb;
@@ -14,8 +14,7 @@ class CollectionLocalRepositoryExampleIsar with CarbonSingleDataSourceMixin<Semb
   String get tableName => 'collaborator';
 
   @override
-  fromJson(Map<String, dynamic> json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+  CollaboratorDTO fromJson(Map<String, dynamic> json) {
+    return CollaboratorDTO.fromJson(json);
   }
 }
