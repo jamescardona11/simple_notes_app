@@ -2,8 +2,12 @@ import 'package:isar/isar.dart';
 
 part 'notes_dao.g.dart';
 
+abstract class BaseInternalDAO {
+  Map<String, dynamic> toJson();
+}
+
 @collection
-class IsarNotesDAO {
+class IsarNotesDAO extends BaseInternalDAO {
   Id isarId = Isar.autoIncrement;
 
   late String id;
@@ -22,4 +26,11 @@ class IsarNotesDAO {
         text: data['text'] as String,
         randomNumber: data['randomNumber'] as int,
       );
+
+  @override
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'text': text,
+        'randomNumber': randomNumber,
+      };
 }

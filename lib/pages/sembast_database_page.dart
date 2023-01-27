@@ -51,6 +51,7 @@ class _SembastDatabasePageState extends State<SembastDatabasePage> {
               if (_dataSource == null) return;
 
               _dataSource!.createOneNote(controller.text);
+              controller.text = '';
             },
             child: Text('Create Note'),
           ),

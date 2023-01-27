@@ -26,7 +26,6 @@ abstract class ICarbonAdapter<ID> {
   Stream<Iterable<AdapterDAO>> readWhere({
     required String table,
     Iterable<CarbonQuery> carbonQueries = const [],
-    bool andFilters = true,
   });
 
   Future<void> update({

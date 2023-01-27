@@ -1,168 +1,188 @@
-// import 'package:db_adapter_flutter/core/isar/isar_adapter_imp.dart';
-// import 'package:db_adapter_flutter/domain/notes.dart';
-// import 'package:flutter/material.dart';
-
-// import '../data_layer/repository/notes_local_repository_example.dart';
-
-// class IsarDatabasePage extends StatefulWidget {
-//   /// default constructor
-//   const IsarDatabasePage({
-//     super.key,
-//   });
-
-//   @override
-//   State<IsarDatabasePage> createState() => _IsarDatabasePageState();
-// }
-
-// class _IsarDatabasePageState extends State<IsarDatabasePage> {
-//   // the best idea is move this to another layer and pre-solve when app start
-//   final Future<IsarAdapterImp> _isarInit = IsarAdapterImp.initAdapter();
-
-//   // considering this is an example and the dataSource is in another layer in a real application
-//   NotesLocalRepositoryExample? _dataSource;
-
-//   TextEditingController controller = TextEditingController();
-//   final List<Notes> notes = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     _isarInit.then((sembast) {
-//       setState(() {
-//         _dataSource = NotesLocalRepositoryExample(sembast);
-//       });
-//     });
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Column(
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-//             child: TextFormField(
-//               autocorrect: false,
-//               controller: controller,
-//             ),
-//           ),
-//           ElevatedButton(
-//             onPressed: saveNoteInDB,
-//             child: Text('Save Note'),
-//           ),
-//           if (_dataSource != null)
-//             Expanded(
-//               child: StreamBuilder<Iterable<AdapterDto>>(
-//                 stream: SembastPocket.instance().readWhere(table: tableName),
-//                 builder: (context, snapshot) {
-//                   if (snapshot.hasData) {
-//                     notes.clear();
-
-//                     notes.addAll(
-//                       snapshot.requireData.map(
-//                         (dto) => Notes(
-//                           id: dto.id,
-//                           note: dto.data['note'],
-//                         ),
-//                       ),
-//                     );
-//                   }
-
-//                   return notes.isEmpty
-//                       ? Center(child: Text('No items'))
-//                       : Padding(
-//                           padding: const EdgeInsets.all(8.0),
-//                           child: ListView.builder(
-//                             itemCount: notes.length,
-//                             itemBuilder: (_, index) => Container(
-//                               height: 50,
-//                               margin: EdgeInsets.all(8),
-//                               decoration: const BoxDecoration(
-//                                   color: Colors.white,
-//                                   borderRadius: BorderRadius.all(
-//                                     Radius.circular(30),
-//                                   ),
-//                                   boxShadow: [
-//                                     BoxShadow(
-//                                       color: Colors.black26,
-//                                       spreadRadius: -4,
-//                                       blurRadius: 8,
-//                                       offset: Offset(0, 4),
-//                                     )
-//                                   ]),
-//                               child: Padding(
-//                                 padding: EdgeInsets.symmetric(horizontal: 20),
-//                                 child: Row(
-//                                   children: [
-//                                     Expanded(
-//                                       child: Text(
-//                                         notes[index].note,
-//                                         overflow: TextOverflow.ellipsis,
-//                                         textAlign: TextAlign.center,
-//                                       ),
-//                                     ),
-//                                     IconButton(
-//                                       onPressed: () => deleteNote(notes[index].id),
-//                                       icon: Icon(
-//                                         Icons.close,
-//                                         color: Colors.red,
-//                                       ),
-//                                     )
-//                                   ],
-//                                 ),
-//                               ),
-//                             ),
-//                           ),
-//                         );
-//                 },
-//               ),
-//             )
-//         ],
-//       ),
-//       floatingActionButton: ElevatedButton(
-//         onPressed: dropTable,
-//         child: Text('Clear DB'),
-//       ),
-//     );
-//   }
-
-//   Future<void> saveNoteInDB() async {
-//     if (controller.text.isEmpty) return;
-
-//     await SembastPocket.instance().create(
-//       table: tableName,
-//       item: AdapterDto(
-//         'DateTime.now().millisecondsSinceEpoch.toString()',
-//         {'note': controller.text},
-//       ),
-//     );
-
-//     controller.text = '';
-//   }
-
-//   void dropTable() {
-//     SembastPocket.instance().dropTable(tableName);
-//   }
-
-//   void deleteNote(String id) {
-//     SembastPocket.instance().delete(table: tableName, id: id);
-//   }
-// }
-
+import 'package:db_adapter_flutter/core/isar/isar_adapter_imp.dart';
+import 'package:db_adapter_flutter/domain/notes.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class IsarDatabasePage extends StatelessWidget {
+import '../data_layer/repository/notes_local_repository_example.dart';
+
+class IsarDatabasePage extends StatefulWidget {
   /// default constructor
   const IsarDatabasePage({
     super.key,
   });
 
   @override
+  State<IsarDatabasePage> createState() => _IsarDatabasePageState();
+}
+
+class _IsarDatabasePageState extends State<IsarDatabasePage> {
+  // the best idea is move this to another layer and pre-solve when app start
+  final Future<IsarAdapterImp> _isarInit = IsarAdapterImp.initAdapter();
+
+  // considering this is an example and the dataSource is in another layer in a real application
+  INotesLocalRepositoryExample? _dataSource;
+
+  final _controllerNote = TextEditingController();
+  final _controllerLimit = TextEditingController();
+  final _controllerRandom = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    _isarInit.then((isar) {
+      setState(() {
+        _dataSource = NotesLocalRepositoryExample(isar);
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('New Page'),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        child: Column(
+          children: [
+            TextFormField(
+              autocorrect: false,
+              controller: _controllerNote,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_dataSource == null || _controllerNote.text.isEmpty) return;
+
+                          _dataSource!.createOneNote(_controllerNote.text);
+                          _controllerNote.text = '';
+                        },
+                        child: const Text('Create Note'),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          if (_dataSource == null) return;
+
+                          _dataSource!.createOneThousandRandomNotes();
+                        },
+                        child: const Text('Random notes'),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Limit',
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                      TextFormField(
+                        autocorrect: false,
+                        controller: _controllerLimit,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly], // O
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'Filter random greater than',
+                        overflow: TextOverflow.ellipsis,
+                        textAlign: TextAlign.center,
+                      ),
+                      TextFormField(
+                        autocorrect: false,
+                        controller: _controllerRandom,
+                        keyboardType: TextInputType.number,
+                        inputFormatters: <TextInputFormatter>[FilteringTextInputFormatter.digitsOnly], // O
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            if (_dataSource != null)
+              Expanded(
+                child: StreamBuilder<List<Notes>>(
+                  stream: _dataSource!.notesStream,
+                  builder: (context, snapshot) {
+                    final List<Notes> notes = [];
+                    if (snapshot.hasData) {
+                      notes.addAll(snapshot.requireData);
+                    }
+
+                    return notes.isEmpty
+                        ? const Center(child: Text('No items'))
+                        : Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ListView.builder(
+                              itemCount: notes.length,
+                              itemBuilder: (_, index) => Container(
+                                height: 80,
+                                margin: const EdgeInsets.symmetric(vertical: 8),
+                                decoration: const BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black26,
+                                        spreadRadius: -4,
+                                        blurRadius: 8,
+                                        offset: Offset(0, 4),
+                                      )
+                                    ]),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            'id: ${notes[index].id.substring(0, 2)}',
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Expanded(
+                                            child: Text(
+                                              notes[index].text,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                          IconButton(
+                                            onPressed: () => _dataSource!.deleteOneNote(notes[index].id),
+                                            icon: const Icon(
+                                              Icons.close,
+                                              color: Colors.red,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                      Text(
+                                        'RandomNumber: ${notes[index].randomNumber}',
+                                        overflow: TextOverflow.ellipsis,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          );
+                  },
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

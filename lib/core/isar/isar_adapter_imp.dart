@@ -18,8 +18,9 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     if (_completer == null) {
       final Completer<IsarAdapterImp> completer = Completer<IsarAdapterImp>();
       try {
+        late Isar? dbInstance;
         if (Isar.instanceNames.isEmpty) {
-          final dbInstance = await Isar.open(
+          dbInstance = await Isar.open(
             name: name,
             [
               IsarNotesDAOSchema,
@@ -27,11 +28,13 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
             inspector: true,
           );
 
-          completer.complete(IsarAdapterImp._(dbInstance));
+          // completer.complete(IsarAdapterImp._(dbInstance));
         }
 
-        final dbInstance = Isar.getInstance(name);
-        completer.complete(IsarAdapterImp._(dbInstance!));
+        dbInstance = Isar.getInstance(name);
+        if (dbInstance == null) throw Exception('Random error init ISAR');
+
+        completer.complete(IsarAdapterImp._(dbInstance));
       } on Exception catch (e) {
         // If there's an error, explicitly return the future with an error.
         // then set the completer to null so we can retry.
@@ -52,12 +55,11 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   // how to improve this identifier for objects
   // can I do with the DTO
   final _isarObjects = {
-    'collaborator': IsarNotesDAO.fromMap,
-    'reaction': IsarNotesDAO.fromMap,
+    'notes': IsarNotesDAO.fromMap,
   };
 
   IsarCollection? getTableByString(String table) {
-    if (table == (IsarNotesDAO).toString()) {
+    if (table == 'notes') {
       return _db.isarNotesDAOs;
     }
 
@@ -84,10 +86,10 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   }) async {
     if (daoList.isEmpty) return;
 
-    // _db.isarCollaboratorDTOs.filter().ima
+    final isarObj = daoList.map((dao) => _isarObjects[table]?.call(dao.data)).where((element) => element != null).map((e) => e!).toList();
 
     final collection = getTableByString(table);
-    return _db.writeTxn(() => collection!.putAll(daoList.map((dato) => dato.data).toList()));
+    return _db.writeTxn(() => collection!.putAll(isarObj));
   }
 
   @override
@@ -123,7 +125,6 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   Stream<Iterable<AdapterDAO>> readWhere({
     required String table,
     Iterable<CarbonQuery> carbonQueries = const [],
-    bool andFilters = true,
   }) async* {
     final collection = getTableByString(table);
 
@@ -139,12 +140,13 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
       }
     }
 
+    // TODO
     yield* collection!
         .buildQuery(
           filter: filter,
         )
         .watch()
-        .map((event) => event.map((element) => AdapterDAO(data: element)));
+        .map((event) => event.map((element) => AdapterDAO(data: (element as BaseInternalDAO).toJson())));
   }
 
   @override

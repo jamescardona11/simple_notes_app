@@ -63,6 +63,13 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
   Stream<Iterable<T>> readWhere({
     Iterable<CarbonQuery> carbonQueries = const [],
   }) {
-    return adapterDb.readWhere(table: tableName, carbonQueries: carbonQueries).map((event) => event.map((dto) => fromJson(dto.data)));
+    return adapterDb
+        .readWhere(
+          table: tableName,
+          carbonQueries: carbonQueries,
+        )
+        .map(
+          (event) => event.map((dto) => fromJson(dto.data)),
+        );
   }
 }
