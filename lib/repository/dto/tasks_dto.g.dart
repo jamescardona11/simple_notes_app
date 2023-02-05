@@ -15,9 +15,9 @@ TaskDto _$TaskDtoFromJson(Map<String, dynamic> json) => TaskDto(
     );
 
 Map<String, dynamic> _$TaskDtoToJson(TaskDto instance) => <String, dynamic>{
+      'id': instance.id,
       'title': instance.title,
       'description': instance.description,
       'isDeleted': instance.isDeleted,
       'isDone': instance.isDone,
-      'id': instance.id,
     };

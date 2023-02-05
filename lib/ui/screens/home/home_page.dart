@@ -49,7 +49,13 @@ class _HomePageState extends State<HomePage> {
 
   final pageList = [
     TasksView(),
+    DeletedTaskView(),
   ];
 
-  void onDrawerItemTap(int index) {}
+  void onDrawerItemTap(int index) {
+    if (index == indexPage) return;
+    setState(() {
+      indexPage = index;
+    });
+  }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:simple_notes_app/domian/domian.dart';
+import 'package:simple_notes_app/domian/use_cases/read_deleted_task_use_case.dart';
 
 import '../cubit_exports.dart';
 
@@ -14,7 +15,10 @@ class TasksCubit extends Cubit<TasksState> {
     this._removeTaskUseCase,
     this._readAllTaskUseCase,
     this._readStatsUseCase,
+    this._readDeletedTaskUseCase,
   ) : super(const TasksState()) {
+    print('Init Task Cubit');
+
     _initStreamListeners();
   }
 
@@ -23,13 +27,16 @@ class TasksCubit extends Cubit<TasksState> {
   final RemoveTaskUseCase _removeTaskUseCase;
   final ReadAllTaskUseCase _readAllTaskUseCase;
   final ReadStatsUseCase _readStatsUseCase;
+  final ReadDeletedTaskUseCase _readDeletedTaskUseCase;
 
   StreamSubscription<List<Task>>? _streamTasksSubscription;
+  StreamSubscription<List<Task>>? _streamDeletedTasksSubscription;
   StreamSubscription<StatsModel>? _streamStatsSubscription;
 
   @override
   Future<void> close() {
     _streamTasksSubscription?.cancel();
+    _streamDeletedTasksSubscription?.cancel();
     _streamStatsSubscription?.cancel();
 
     return super.close();
@@ -55,7 +62,17 @@ class TasksCubit extends Cubit<TasksState> {
 
   Future<void> _initStreamListeners() async {
     _streamTasksSubscription = _readAllTaskUseCase.call().listen((tasks) {
-      emit(state.copyWith(allTasks: tasks));
+      emit(state.copyWith(
+        allTasks: tasks.where((element) => !element.isDeleted).toList(),
+      ));
+    });
+
+    // This use_case is to show how to work with queries - filtering
+    // probably for this app, we can avoid the creation of this use case
+    _streamDeletedTasksSubscription = _readDeletedTaskUseCase.call().listen((tasks) {
+      emit(state.copyWith(
+        removedTasks: tasks,
+      ));
     });
 
     _streamStatsSubscription = _readStatsUseCase.call().listen((stat) {

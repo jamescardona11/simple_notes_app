@@ -1,4 +1,4 @@
-class CarbonQuery {}
+abstract class CarbonQuery {}
 
 class LimitCarbonQuery extends CarbonQuery {
   final int limit;

@@ -22,7 +22,7 @@ class LocalTaskRepository extends ILocalTaskRepository with CarbonSingleDataSour
   Future<void> removeTaskFromDB(String id) => delete(id);
 
   @override
-  Stream<List<Task>> readAllTask() => readWhere().map(
+  Stream<List<Task>> readAllTask([List<CarbonQuery> queries = const []]) => readWhere(carbonQueries: queries).map(
         (dtoList) => dtoList.map((dto) => dto.toEntity()).toList(),
       );
 

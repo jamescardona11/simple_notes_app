@@ -147,7 +147,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
         .buildQuery(
           filter: filter,
         )
-        .watch()
+        .watch(fireImmediately: true)
         .map((event) => event.map(
               (element) => AdapterDAO(
                 data: (element as BaseCarbonDTO).toJson(),

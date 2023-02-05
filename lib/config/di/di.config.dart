@@ -7,11 +7,13 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:simple_notes_app/config/di/di_cubit.dart' as _i6;
-import 'package:simple_notes_app/config/di/di_repository.dart' as _i8;
-import 'package:simple_notes_app/config/di/di_use_cases.dart' as _i7;
-import 'package:simple_notes_app/cubit/cubit_exports.dart' as _i5;
+import 'package:simple_notes_app/config/di/di_cubit.dart' as _i7;
+import 'package:simple_notes_app/config/di/di_repository.dart' as _i9;
+import 'package:simple_notes_app/config/di/di_use_cases.dart' as _i8;
+import 'package:simple_notes_app/cubit/cubit_exports.dart' as _i6;
 import 'package:simple_notes_app/domian/domian.dart' as _i4;
+import 'package:simple_notes_app/domian/use_cases/read_deleted_task_use_case.dart'
+    as _i5;
 import 'package:simple_notes_app/repository/db_core/db_core.dart' as _i3;
 
 /// ignore_for_file: unnecessary_lambdas
@@ -44,30 +46,33 @@ Future<_i1.GetIt> init(
       repositoryModule.taskRepository(
           gh<_i3.ICarbonAdapter<dynamic>>(instanceName: 'Sembast')));
   gh.singleton<_i4.ReadAllTaskUseCase>(useCasesModule.readAllTask);
+  gh.singleton<_i5.ReadDeletedTaskUseCase>(
+      useCasesModule.readDeletedTaskUseCase);
   gh.singleton<_i4.ReadStatsUseCase>(useCasesModule.readStats);
   gh.singleton<_i4.RemoveTaskUseCase>(useCasesModule.removeTask);
   gh.singleton<_i4.UpdateTaskUseCase>(useCasesModule.updateTask);
   gh.singleton<_i4.CreateTaskUseCase>(useCasesModule.createTask);
-  gh.factory<_i5.TasksCubit>(() => cubitModule.tasksCubit);
+  gh.factory<_i6.TasksCubit>(() => cubitModule.tasksCubit);
   return getIt;
 }
 
-class _$CubitModule extends _i6.CubitModule {
+class _$CubitModule extends _i7.CubitModule {
   _$CubitModule(this._getIt);
 
   final _i1.GetIt _getIt;
 
   @override
-  _i5.TasksCubit get tasksCubit => _i5.TasksCubit(
+  _i6.TasksCubit get tasksCubit => _i6.TasksCubit(
         _getIt<_i4.CreateTaskUseCase>(),
         _getIt<_i4.UpdateTaskUseCase>(),
         _getIt<_i4.RemoveTaskUseCase>(),
         _getIt<_i4.ReadAllTaskUseCase>(),
         _getIt<_i4.ReadStatsUseCase>(),
+        _getIt<_i5.ReadDeletedTaskUseCase>(),
       );
 }
 
-class _$UseCasesModule extends _i7.UseCasesModule {
+class _$UseCasesModule extends _i8.UseCasesModule {
   _$UseCasesModule(this._getIt);
 
   final _i1.GetIt _getIt;
@@ -89,6 +94,9 @@ class _$UseCasesModule extends _i7.UseCasesModule {
   @override
   _i4.RemoveTaskUseCase get removeTask =>
       _i4.RemoveTaskUseCase(_getIt<_i4.ILocalTaskRepository>());
+  @override
+  _i5.ReadDeletedTaskUseCase get readDeletedTaskUseCase =>
+      _i5.ReadDeletedTaskUseCase(_getIt<_i4.ILocalTaskRepository>());
 }
 
-class _$RepositoryModule extends _i8.RepositoryModule {}
+class _$RepositoryModule extends _i9.RepositoryModule {}

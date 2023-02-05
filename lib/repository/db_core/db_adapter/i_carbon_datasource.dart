@@ -12,17 +12,17 @@ abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
 
   Future<void> create(T dto);
 
-  Future<void> createMany(Iterable<T> dto);
+  Future<void> createMany(List<T> dto);
 
   Stream<T?> read(String id);
 
-  Stream<Iterable<T>> readWhere({
-    Iterable<CarbonQuery> carbonQueries = const [],
+  Stream<List<T>> readWhere({
+    List<CarbonQuery> carbonQueries = const [],
   });
 
   Future<void> update(T dto);
 
-  Future<void> updateMany(Iterable<T> dto);
+  Future<void> updateMany(List<T> dto);
 
   Future<void> delete(String id);
 

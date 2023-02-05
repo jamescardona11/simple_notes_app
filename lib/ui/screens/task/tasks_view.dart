@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_notes_app/cubit/cubit_exports.dart';
 import 'package:simple_notes_app/domian/models/tasks_model.dart';
 import 'package:simple_notes_app/ui/ui.dart';
+import 'package:simple_notes_app/ui/widgets/tasks_list.dart';
 
 class TasksView extends StatelessWidget {
   const TasksView({
@@ -13,6 +14,7 @@ class TasksView extends StatelessWidget {
     return BlocBuilder<TasksCubit, TasksState>(builder: (context, state) {
       List<Task> tasksList = state.allTasks;
       return Scaffold(
+        // backgroundColor: AppColors.backgroundColor,
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 4),
           child: Column(
@@ -35,7 +37,9 @@ class TasksView extends StatelessWidget {
                   ),
                 ],
               ),
-              TasksList(tasks: tasksList),
+              TasksListWidget(
+                tasks: tasksList,
+              ),
             ],
           ),
         ),
