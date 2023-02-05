@@ -1,7 +1,7 @@
-import 'package:db_adapter_flutter/core/db_core.dart';
-import 'package:db_adapter_flutter/data_layer/core_db/mixin_single_data_source.dart';
-import 'package:db_adapter_flutter/domain/notes.dart';
 import 'package:rxdart/subjects.dart';
+import 'package:simple_notes_app/core/db_core.dart';
+import 'package:simple_notes_app/old/data_layer/core_db/mixin_single_data_source.dart';
+import 'package:simple_notes_app/old/domain/notes.dart';
 
 import '../dto/notes_dto.dart';
 

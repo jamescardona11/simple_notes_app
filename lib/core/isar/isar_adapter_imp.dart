@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:db_adapter_flutter/core/db_core.dart';
+import 'package:simple_notes_app/core/db_core.dart';
 import 'package:isar/isar.dart';
 
 import 'isar_dao/notes_dao.dart';

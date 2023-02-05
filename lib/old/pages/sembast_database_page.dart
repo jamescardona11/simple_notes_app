@@ -1,7 +1,8 @@
-import 'package:db_adapter_flutter/core/sembast/sembast_adapter_imp.dart';
-import 'package:db_adapter_flutter/data_layer/repository/notes_local_repository_example.dart';
-import 'package:db_adapter_flutter/domain/notes.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_notes_app/core/sembast/sembast_adapter_imp.dart';
+import 'package:simple_notes_app/old/data_layer/repository/notes_local_repository_example.dart';
+
+import '../domain/notes.dart';
 
 class SembastDatabasePage extends StatefulWidget {
   /// default constructor

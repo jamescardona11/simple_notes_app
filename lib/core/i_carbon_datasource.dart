@@ -1,4 +1,5 @@
-import '../data_layer/core_db/i_carbon_id_model.dart';
+import 'package:simple_notes_app/old/data_layer/core_db/i_carbon_id_model.dart';
+
 import 'query_filter.dart';
 
 /// adapter to convert inner class request to external request

@@ -1,6 +1,6 @@
-import 'package:db_adapter_flutter/data_layer/core_db/i_carbon_id_model.dart';
-import 'package:db_adapter_flutter/domain/notes.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:simple_notes_app/old/data_layer/core_db/i_carbon_id_model.dart';
+import 'package:simple_notes_app/old/domain/notes.dart';
 
 part 'notes_dto.g.dart';
 

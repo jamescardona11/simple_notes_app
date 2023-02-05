@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:db_adapter_flutter/core/db_core.dart';
+import 'package:simple_notes_app/core/db_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';

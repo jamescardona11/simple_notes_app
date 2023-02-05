@@ -1,4 +1,4 @@
-import 'package:db_adapter_flutter/core/db_core.dart';
+import 'package:simple_notes_app/core/db_core.dart';
 
 import 'i_carbon_id_model.dart';
 

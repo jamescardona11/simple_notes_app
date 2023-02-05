@@ -1,7 +1,7 @@
-import 'package:db_adapter_flutter/core/isar/isar_adapter_imp.dart';
-import 'package:db_adapter_flutter/domain/notes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:simple_notes_app/core/isar/isar_adapter_imp.dart';
+import 'package:simple_notes_app/old/domain/notes.dart';
 
 import '../data_layer/repository/notes_local_repository_example.dart';
 

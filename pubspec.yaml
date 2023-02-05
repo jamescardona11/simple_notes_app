@@ -1,4 +1,4 @@
-name: db_adapter_flutter
+name: simple_notes_app
 description: A new Flutter project.
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -42,6 +42,8 @@ dependencies:
   
   rxdart: ^0.27.7
   flutter_bloc: ^8.1.1
+  animations: ^2.0.7
+  equatable: ^2.0.5
   
 
 
