@@ -5,5 +5,5 @@ class RemoveTaskUseCase {
 
   RemoveTaskUseCase(this.repository);
 
-  Future<void> call(String id) async {}
+  Future<void> call(String id) => repository.removeTaskFromDB(id);
 }

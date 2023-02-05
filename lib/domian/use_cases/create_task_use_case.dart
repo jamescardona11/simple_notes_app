@@ -5,5 +5,5 @@ class CreateTaskUseCase {
 
   CreateTaskUseCase(this.repository);
 
-  Future<void> call(Task task) async {}
+  Future<void> call(Task task) => repository.saveTaskInDB(task);
 }

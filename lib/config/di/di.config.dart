@@ -60,6 +60,7 @@ class _$CubitModule extends _i6.CubitModule {
   _i5.TasksCubit get tasksCubit => _i5.TasksCubit(
         _getIt<_i4.CreateTaskUseCase>(),
         _getIt<_i4.UpdateTaskUseCase>(),
+        _getIt<_i4.RemoveTaskUseCase>(),
         _getIt<_i4.ReadAllTaskUseCase>(),
         _getIt<_i4.ReadStatsUseCase>(),
       );

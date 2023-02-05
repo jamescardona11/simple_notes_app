@@ -5,5 +5,5 @@ class UpdateTaskUseCase {
 
   UpdateTaskUseCase(this.repository);
 
-  Future<void> call(Task task) async {}
+  Future<void> call(Task task) => repository.updateTaskInDB(task);
 }

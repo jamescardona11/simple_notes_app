@@ -51,7 +51,7 @@ class TaskItem extends StatelessWidget {
           value: task.isDone,
           onChanged: task.isDeleted == false
               ? (value) {
-                  context.read<TasksCubit>().updateTask(task);
+                  context.read<TasksCubit>().completeTask(task);
                 }
               : null,
         ),

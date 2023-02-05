@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
@@ -103,7 +102,7 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     required AdapterDAO dao,
   }) async {
     final store = _sembastStore(table);
-    await store.record(dao.id!).update(_db, dao.data);
+    await store.record(dao.id!).put(_db, dao.data);
   }
 
   @override
@@ -113,7 +112,7 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
   }) async {
     final store = _sembastStore(table);
     await _db.transaction((transaction) async {
-      await store.records(daoList.map((item) => item.id!)).update(
+      await store.records(daoList.map((item) => item.id!)).put(
             _db,
             daoList.map((item) => item.data).toList(),
           );

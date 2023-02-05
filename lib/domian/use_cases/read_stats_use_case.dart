@@ -9,5 +9,16 @@ class ReadStatsUseCase {
     this.readAllTask,
   );
 
-  Stream<StatsModel> call() async* {}
+  Stream<StatsModel> call() => readAllTask.call().map((tasks) {
+        int completed = 0;
+
+        for (var task in tasks) {
+          completed += task.isDone ? 1 : 0;
+        }
+
+        return StatsModel(
+          completedTask: completed,
+          pendingTask: tasks.length - completed,
+        );
+      });
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:isar/isar.dart';
+import 'package:simple_notes_app/repository/db_core/isar_dto/isar_task_dto.dart';
 
 import '../db_core.dart';
 
@@ -53,12 +54,12 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   // how to improve this identifier for objects
   // can I do with the DTO
   final _isarObjects = {
-    // 'notes': IsarNotesDAO.fromMap,
+    'task_table': IsarTaskDTO.fromJson,
   };
 
-  IsarCollection? getTableByString(String table) {
-    if (table == 'notes') {
-      // return _db.isarNotesDAOs;
+  IsarCollection? _getTableByString(String table) {
+    if (table == 'task_table') {
+      return _db.isarTaskDTOs;
     }
 
     throw Exception('The type is not supported');
@@ -70,7 +71,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     required AdapterDAO dao,
   }) async {
     // table
-    final collection = getTableByString(table);
+    final collection = _getTableByString(table);
     final isarObj = _isarObjects[table]?.call(dao.data);
     if (isarObj == null) return;
 
@@ -86,7 +87,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
 
     final isarObj = daoList.map((dao) => _isarObjects[table]?.call(dao.data)).where((element) => element != null).map((e) => e!).toList();
 
-    final collection = getTableByString(table);
+    final collection = _getTableByString(table);
     return _db.writeTxn(() => collection!.putAll(isarObj));
   }
 
@@ -95,7 +96,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     required String table,
     required int id,
   }) async {
-    final collection = getTableByString(table);
+    final collection = _getTableByString(table);
     return _db.writeTxn(() => collection!.delete(id));
   }
 
@@ -104,7 +105,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     required String table,
     required int id,
   }) async* {
-    final collection = getTableByString(table);
+    final collection = _getTableByString(table);
 
     final element = await collection!.get(id);
     if (element == null) {
@@ -124,7 +125,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     required String table,
     Iterable<CarbonQuery> carbonQueries = const [],
   }) async* {
-    final collection = getTableByString(table);
+    final collection = _getTableByString(table);
 
     FilterCondition? filter;
     for (CarbonQuery query in carbonQueries) {

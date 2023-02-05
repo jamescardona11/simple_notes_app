@@ -11,6 +11,7 @@ class TasksCubit extends Cubit<TasksState> {
   TasksCubit(
     this._createTaskUseCase,
     this._updateTaskUseCase,
+    this._removeTaskUseCase,
     this._readAllTaskUseCase,
     this._readStatsUseCase,
   ) : super(const TasksState()) {
@@ -19,44 +20,46 @@ class TasksCubit extends Cubit<TasksState> {
 
   final CreateTaskUseCase _createTaskUseCase;
   final UpdateTaskUseCase _updateTaskUseCase;
+  final RemoveTaskUseCase _removeTaskUseCase;
   final ReadAllTaskUseCase _readAllTaskUseCase;
   final ReadStatsUseCase _readStatsUseCase;
 
   StreamSubscription<List<Task>>? _streamTasksSubscription;
+  StreamSubscription<StatsModel>? _streamStatsSubscription;
 
   @override
   Future<void> close() {
     _streamTasksSubscription?.cancel();
+    _streamStatsSubscription?.cancel();
 
     return super.close();
   }
 
-  void addTask(Task task) {
-    List<Task> allTasks = List.from(state.allTasks)..add(task);
-
-    emit(TasksState(allTasks: allTasks, removedTasks: state.removedTasks));
+  Future<void> addTask(Task task) async {
+    await _createTaskUseCase.call(task);
   }
 
-  void updateTask(Task task) {
-    int index = List.from(state.allTasks).indexOf(task);
-    List<Task> allTasks = List.from(state.allTasks)..remove(task);
-    task.isDone == false ? allTasks.insert(index, task.copyWith(isDone: true)) : allTasks.insert(index, task.copyWith(isDone: false));
-
-    emit(TasksState(allTasks: allTasks, removedTasks: state.removedTasks));
+  Future<void> completeTask(Task task) async {
+    await _updateTaskUseCase.call(task.copyWith(isDone: true));
   }
 
   // archive task - delete temporary
-  void deleteTask(String id) {}
-
-  void removeTask(String id) {}
-
-  Future<void> _initStreamListeners() async {
-    // _streamTasksSubscription = _localTaskRepository.readTask().listen((tasks) {
-    //   _addTaskFromDatabase(tasks);
-    // });
+  Future<void> deleteTask(String id) async {
+    final task = state.allTasks.firstWhere((element) => element.id == id);
+    await _updateTaskUseCase.call(task.copyWith(isDeleted: true));
   }
 
-  void _addTaskFromDatabase(List<Task> tasks) {
-    emit(state.copyWith(allTasks: tasks));
+  Future<void> removeTask(String id) async {
+    await _removeTaskUseCase.call(id);
+  }
+
+  Future<void> _initStreamListeners() async {
+    _streamTasksSubscription = _readAllTaskUseCase.call().listen((tasks) {
+      emit(state.copyWith(allTasks: tasks));
+    });
+
+    _streamStatsSubscription = _readStatsUseCase.call().listen((stat) {
+      emit(state.copyWith(statsModel: stat));
+    });
   }
 }
