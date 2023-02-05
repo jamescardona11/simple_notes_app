@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_notes_app/blocs/bloc_exports.dart';
+import 'package:simple_notes_app/cubit/cubit_exports.dart';
 import 'package:simple_notes_app/domian/models/tasks_model.dart';
 import 'package:simple_notes_app/ui/ui.dart';
 
@@ -10,7 +10,7 @@ class TasksView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TasksBloc, TasksState>(builder: (context, state) {
+    return BlocBuilder<TasksCubit, TasksState>(builder: (context, state) {
       List<Task> tasksList = state.allTasks;
       return Scaffold(
         body: Padding(

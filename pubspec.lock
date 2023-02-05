@@ -276,7 +276,7 @@ packages:
     source: hosted
     version: "3.2.0"
   get_it:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: get_it
       sha256: "290fde3a86072e4b37dbb03c07bec6126f0ecc28dad403c12ffe2e5a2d751ab7"
@@ -324,7 +324,7 @@ packages:
     source: hosted
     version: "2.3.0+1"
   injectable:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: injectable
       sha256: "7dab7d341feb40a0590d9ff6261aea9495522005e2c6763f9161a4face916f7b"

@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import '../../blocs/bloc_exports.dart';
-import '../../domian/models/tasks_model.dart';
+import 'package:simple_notes_app/cubit/cubit_exports.dart';
+import 'package:simple_notes_app/domian/domian.dart';
 
 class TasksList extends StatelessWidget {
   const TasksList({
@@ -52,7 +51,7 @@ class TaskItem extends StatelessWidget {
           value: task.isDone,
           onChanged: task.isDeleted == false
               ? (value) {
-                  context.read<TasksBloc>().updateTask(task);
+                  context.read<TasksCubit>().updateTask(task);
                 }
               : null,
         ),
@@ -106,7 +105,7 @@ class TaskItem extends StatelessWidget {
     required BuildContext ctx,
     required Task task,
   }) {
-    task.isDeleted ? ctx.read<TasksBloc>().removeTask(task.id) : ctx.read<TasksBloc>().deleteTask(task.id);
+    task.isDeleted ? ctx.read<TasksCubit>().removeTask(task.id) : ctx.read<TasksCubit>().deleteTask(task.id);
     Navigator.pop(ctx);
   }
 }

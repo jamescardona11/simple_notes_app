@@ -1,38 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:simple_notes_app/repository/local_task_repository.dart';
 import 'package:simple_notes_app/ui/screens/home/home_page.dart';
 
-import 'blocs/bloc_exports.dart';
-import 'repository/db_core/db_core.dart';
+import 'config/di/di.dart';
+import 'cubit/cubit_exports.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await configureDependencies();
 
-  final ICarbonAdapter dbImplementation = await _initDB();
-
-  final localTaskRepository = LocalTaskRepository(dbImplementation);
-
-  runApp(MyApp(
-    localTaskRepository: localTaskRepository,
-  ));
-}
-
-Future<ICarbonAdapter> _initDB() {
-  return IsarAdapterImp.initAdapter();
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({
     Key? key,
-    required this.localTaskRepository,
   }) : super(key: key);
-
-  final LocalTaskRepository localTaskRepository;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => TasksBloc(localTaskRepository),
+      create: (_) => getIt<TasksCubit>(),
       child: MaterialApp(
         title: 'Flutter Tasks App',
         theme: ThemeData(

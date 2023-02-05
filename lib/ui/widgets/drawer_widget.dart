@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_notes_app/blocs/bloc_exports.dart';
+import 'package:simple_notes_app/cubit/cubit_exports.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({
@@ -24,7 +24,7 @@ class MyDrawer extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
-            BlocBuilder<TasksBloc, TasksState>(
+            BlocBuilder<TasksCubit, TasksState>(
               builder: (context, state) {
                 return ListTile(
                   onTap: () {
@@ -36,7 +36,7 @@ class MyDrawer extends StatelessWidget {
                 );
               },
             ),
-            BlocBuilder<TasksBloc, TasksState>(
+            BlocBuilder<TasksCubit, TasksState>(
               builder: (context, state) {
                 return ListTile(
                   onTap: () {

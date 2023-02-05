@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simple_notes_app/blocs/bloc_exports.dart';
+import 'package:simple_notes_app/cubit/cubit_exports.dart';
 
 import '../../domian/models/tasks_model.dart';
 
@@ -42,7 +42,7 @@ void showModalBox(BuildContext context) {
                       var task = Task.create(
                         title: titleController.text,
                       );
-                      context.read<TasksBloc>().addTask(task);
+                      context.read<TasksCubit>().addTask(task);
                       Navigator.pop(context);
                     },
                     child: const Text("Add"),
