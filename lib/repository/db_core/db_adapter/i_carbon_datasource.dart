@@ -12,7 +12,7 @@ abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
 
   Future<void> create(T dto);
 
-  Future<void> createMany(List<T> dto);
+  Future<void> createMany(List<T> dtos);
 
   Stream<T?> read(String id);
 
@@ -22,7 +22,7 @@ abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
 
   Future<void> update(T dto);
 
-  Future<void> updateMany(List<T> dto);
+  Future<void> updateMany(List<T> dtos);
 
   Future<void> delete(String id);
 

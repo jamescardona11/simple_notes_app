@@ -39,6 +39,7 @@ dependencies:
   flutter_lorem: ^2.0.0
   uuid: ^3.0.7
   font_awesome_flutter: ^10.3.0
+  
 
   
   rxdart: ^0.27.7

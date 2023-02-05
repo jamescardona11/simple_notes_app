@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:simple_notes_app/domian/domian.dart';
+import 'package:simple_notes_app/domian/use_cases/bulk_creation_task_use_case.dart';
 
 import '../cubit_exports.dart';
 
@@ -16,10 +18,12 @@ class TasksCubit extends Cubit<TasksState> {
     this._readStatsUseCase,
     this._readDeletedTaskUseCase,
     this._readLastCompletedTaskUseCase,
+    this._bulkCreationTaskUseCase,
   ) : super(const TasksState()) {
     print('Init Task Cubit');
 
     _initStreamListeners();
+    readCompletedTask();
   }
 
   final CreateTaskUseCase _createTaskUseCase;
@@ -29,6 +33,7 @@ class TasksCubit extends Cubit<TasksState> {
   final ReadStatsUseCase _readStatsUseCase;
   final ReadDeletedTaskUseCase _readDeletedTaskUseCase;
   final ReadLastCompletedTaskUseCase _readLastCompletedTaskUseCase;
+  final BulkCreationTaskUseCase _bulkCreationTaskUseCase;
 
   StreamSubscription<List<Task>>? _streamTasksSubscription;
   StreamSubscription<List<Task>>? _streamDeletedTasksSubscription;
@@ -66,7 +71,25 @@ class TasksCubit extends Cubit<TasksState> {
       state.completedTaskPagination,
     );
 
-    emit(state.copyWith(completedTask: items, completedTaskPagination: items.length));
+    emit(state.copyWith(
+      completedTask: items,
+      completedTaskPagination: items.length,
+    ));
+  }
+
+  Future<void> create100RandomTask() async {
+    final List<Task> tasks = [];
+    for (int i = 0; i < 100; i++) {
+      tasks.add(
+        Task.create(
+          title: lorem(
+            paragraphs: 1,
+            words: 1,
+          ),
+        ),
+      );
+    }
+    await _bulkCreationTaskUseCase.call(tasks);
   }
 
   Future<void> _initStreamListeners() async {

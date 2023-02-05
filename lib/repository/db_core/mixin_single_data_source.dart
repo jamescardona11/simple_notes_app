@@ -13,9 +13,9 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
       );
 
   @override
-  Future<void> createMany(Iterable<T> dto) => adapterDb.createMany(
+  Future<void> createMany(Iterable<T> dtos) => adapterDb.createMany(
         table: tableName,
-        daoList: dto.map((dao) => AdapterDAO(
+        daoList: dtos.map((dao) => AdapterDAO(
               id: dao.dbID,
               data: dao.toJson(),
             )),
@@ -31,9 +31,9 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
       );
 
   @override
-  Future<void> updateMany(Iterable<T> dto) => adapterDb.updateMany(
+  Future<void> updateMany(Iterable<T> dtos) => adapterDb.updateMany(
         table: tableName,
-        daoList: dto.map((dao) => AdapterDAO(
+        daoList: dtos.map((dao) => AdapterDAO(
               id: dao.dbID,
               data: dao.toJson(),
             )),
