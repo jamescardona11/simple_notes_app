@@ -7,14 +7,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
-import 'package:simple_notes_app/config/di/di_core.dart' as _i10;
 import 'package:simple_notes_app/config/di/di_cubit.dart' as _i6;
 import 'package:simple_notes_app/config/di/di_repository.dart' as _i8;
 import 'package:simple_notes_app/config/di/di_use_cases.dart' as _i7;
 import 'package:simple_notes_app/cubit/cubit_exports.dart' as _i5;
 import 'package:simple_notes_app/domian/domian.dart' as _i4;
 import 'package:simple_notes_app/repository/db_core/db_core.dart' as _i3;
-import 'package:simple_notes_app/repository/repository.dart' as _i9;
 
 /// ignore_for_file: unnecessary_lambdas
 /// ignore_for_file: lines_longer_than_80_chars
@@ -29,15 +27,21 @@ Future<_i1.GetIt> init(
     environment,
     environmentFilter,
   );
-  final coreModule = _$CoreModule();
-  final modelModule = _$ModelModule(getIt);
+  final repositoryModule = _$RepositoryModule();
   final useCasesModule = _$UseCasesModule(getIt);
   final cubitModule = _$CubitModule(getIt);
   await gh.singletonAsync<_i3.ICarbonAdapter<dynamic>>(
-    () => coreModule.dbApp,
+    () => repositoryModule.isarDBApp,
+    instanceName: 'Isar',
     preResolve: true,
   );
-  gh.lazySingleton<_i4.ILocalTaskRepository>(() => modelModule.taskRepository);
+  await gh.singletonAsync<_i3.ICarbonAdapter<dynamic>>(
+    () => repositoryModule.sembastDBApp,
+    instanceName: 'Sembast',
+    preResolve: true,
+  );
+  gh.lazySingleton<_i4.ILocalTaskRepository>(() => repositoryModule
+      .taskRepository(gh<_i3.ICarbonAdapter<dynamic>>(instanceName: 'Isar')));
   gh.singleton<_i4.ReadAllTaskUseCase>(useCasesModule.readAllTask);
   gh.singleton<_i4.ReadStatsUseCase>(useCasesModule.readStats);
   gh.singleton<_i4.RemoveTaskUseCase>(useCasesModule.removeTask);
@@ -85,14 +89,4 @@ class _$UseCasesModule extends _i7.UseCasesModule {
       _i4.RemoveTaskUseCase(_getIt<_i4.ILocalTaskRepository>());
 }
 
-class _$ModelModule extends _i8.ModelModule {
-  _$ModelModule(this._getIt);
-
-  final _i1.GetIt _getIt;
-
-  @override
-  _i9.LocalTaskRepository get taskRepository =>
-      _i9.LocalTaskRepository(_getIt<_i3.ICarbonAdapter<dynamic>>());
-}
-
-class _$CoreModule extends _i10.CoreModule {}
+class _$RepositoryModule extends _i8.RepositoryModule {}

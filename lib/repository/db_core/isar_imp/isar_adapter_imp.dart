@@ -13,6 +13,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
 
   static Future<IsarAdapterImp> initAdapter({
     String name = 'isar_default_name.db',
+    required List<CollectionSchema<dynamic>> schemas,
   }) async {
     if (_completer == null) {
       final Completer<IsarAdapterImp> completer = Completer<IsarAdapterImp>();
@@ -21,7 +22,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
         if (Isar.instanceNames.isEmpty) {
           dbInstance = await Isar.open(
             name: name,
-            [],
+            schemas,
             inspector: true,
           );
 
