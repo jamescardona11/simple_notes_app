@@ -28,5 +28,5 @@ abstract class RepositoryModule {
   }
 
   @LazySingleton(as: ILocalTaskRepository)
-  LocalTaskRepository taskRepository(@Named('Isar') ICarbonAdapter adapterDb) => LocalTaskRepository(adapterDb);
+  LocalTaskRepository taskRepository(@Named('Sembast') ICarbonAdapter adapterDb) => LocalTaskRepository(adapterDb);
 }

@@ -40,8 +40,9 @@ Future<_i1.GetIt> init(
     instanceName: 'Sembast',
     preResolve: true,
   );
-  gh.lazySingleton<_i4.ILocalTaskRepository>(() => repositoryModule
-      .taskRepository(gh<_i3.ICarbonAdapter<dynamic>>(instanceName: 'Isar')));
+  gh.lazySingleton<_i4.ILocalTaskRepository>(() =>
+      repositoryModule.taskRepository(
+          gh<_i3.ICarbonAdapter<dynamic>>(instanceName: 'Sembast')));
   gh.singleton<_i4.ReadAllTaskUseCase>(useCasesModule.readAllTask);
   gh.singleton<_i4.ReadStatsUseCase>(useCasesModule.readStats);
   gh.singleton<_i4.RemoveTaskUseCase>(useCasesModule.removeTask);

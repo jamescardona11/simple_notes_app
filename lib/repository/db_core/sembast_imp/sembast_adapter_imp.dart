@@ -78,7 +78,10 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     required AdapterDAO dao,
   }) async {
     final store = _sembastStore(table);
-    await store.record(dao.id!).add(_db, dao.data);
+    await store.record(dao.id!).add(
+          _db,
+          dao.formatData(),
+        );
   }
 
   @override
@@ -90,7 +93,7 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
       final store = _sembastStore(table);
       await store.records(daoList.map((item) => item.id!)).put(
             transaction,
-            daoList.map((item) => item.data).toList(),
+            daoList.map((item) => item.formatData()).toList(),
             merge: true,
           );
     });

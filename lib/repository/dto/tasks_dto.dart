@@ -8,11 +8,11 @@ part 'tasks_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class TaskDto extends BaseCarbonDTO {
+  final String id;
   final String title;
   final String description;
   final bool isDeleted;
   final bool isDone;
-  final String id;
 
   TaskDto({
     required this.id,
