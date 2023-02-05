@@ -30,6 +30,7 @@ class TasksView extends StatelessWidget {
                     child: StatCard(
                       color: Colors.amber,
                       label: 'Completed Tasks',
+                      taskLength: state.statsModel.completedTask,
                       onTap: () {
                         onDrawerItemTap.call(2);
                       },
@@ -39,6 +40,7 @@ class TasksView extends StatelessWidget {
                     child: StatCard(
                       color: Colors.indigoAccent,
                       label: 'PendingTask Tasks',
+                      taskLength: state.statsModel.pendingTask,
                     ),
                   ),
                 ],

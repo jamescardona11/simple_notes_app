@@ -20,6 +20,8 @@ class TasksState extends Equatable {
         allTasks,
         removedTasks,
         statsModel,
+        completedTask,
+        completedTaskPagination,
       ];
 
   TasksState copyWith({

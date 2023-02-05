@@ -3,6 +3,8 @@ export 'models/project_model.dart';
 export 'models/stats_model.dart';
 export 'models/tasks_model.dart';
 export 'repository/i_local_task_repository.dart';
+export 'use_cases/bulk_creation_task_use_case.dart';
+export 'use_cases/clear_task_db_use_case.dart';
 export 'use_cases/create_task_use_case.dart';
 export 'use_cases/read_all_task_use_case.dart';
 export 'use_cases/read_deleted_task_use_case.dart';

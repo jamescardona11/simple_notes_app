@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_lorem/flutter_lorem.dart';
 import 'package:simple_notes_app/domian/domian.dart';
-import 'package:simple_notes_app/domian/use_cases/bulk_creation_task_use_case.dart';
 
 import '../cubit_exports.dart';
 
@@ -19,11 +18,11 @@ class TasksCubit extends Cubit<TasksState> {
     this._readDeletedTaskUseCase,
     this._readLastCompletedTaskUseCase,
     this._bulkCreationTaskUseCase,
+    this._clearTaskDbUseCase,
   ) : super(const TasksState()) {
     print('Init Task Cubit');
 
     _initStreamListeners();
-    readCompletedTask();
   }
 
   final CreateTaskUseCase _createTaskUseCase;
@@ -34,6 +33,7 @@ class TasksCubit extends Cubit<TasksState> {
   final ReadDeletedTaskUseCase _readDeletedTaskUseCase;
   final ReadLastCompletedTaskUseCase _readLastCompletedTaskUseCase;
   final BulkCreationTaskUseCase _bulkCreationTaskUseCase;
+  final ClearTaskDbUseCase _clearTaskDbUseCase;
 
   StreamSubscription<List<Task>>? _streamTasksSubscription;
   StreamSubscription<List<Task>>? _streamDeletedTasksSubscription;
@@ -73,7 +73,7 @@ class TasksCubit extends Cubit<TasksState> {
 
     emit(state.copyWith(
       completedTask: items,
-      completedTaskPagination: items.length,
+      completedTaskPagination: items.length + 10,
     ));
   }
 
@@ -84,7 +84,7 @@ class TasksCubit extends Cubit<TasksState> {
         Task.create(
           title: lorem(
             paragraphs: 1,
-            words: 1,
+            words: 2,
           ),
         ),
       );
@@ -92,10 +92,14 @@ class TasksCubit extends Cubit<TasksState> {
     await _bulkCreationTaskUseCase.call(tasks);
   }
 
+  Future<void> clearTaskDB() async {
+    await _clearTaskDbUseCase.call();
+  }
+
   Future<void> _initStreamListeners() async {
     _streamTasksSubscription = _readAllTaskUseCase.call().listen((tasks) {
       emit(state.copyWith(
-        allTasks: tasks.where((element) => !element.isDeleted).toList(),
+        allTasks: tasks.where((element) => !element.isDeleted && !element.isDone).toList(),
       ));
     });
 

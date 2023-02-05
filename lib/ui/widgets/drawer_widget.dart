@@ -94,6 +94,23 @@ class MyDrawer extends StatelessWidget {
                 // trailing: Text(state.statsModel.completedTask.toString()),
                 title: const Text("Create Random task"),
               ),
+              ListTile(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  context.read<TasksCubit>().clearTaskDB();
+                },
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      FontAwesomeIcons.remove,
+                      size: 18,
+                    ),
+                  ],
+                ),
+                // trailing: Text(state.statsModel.completedTask.toString()),
+                title: const Text("Clear DB task"),
+              ),
             ],
           ),
         ),

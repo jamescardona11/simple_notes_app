@@ -42,4 +42,8 @@ abstract class ICarbonAdapter<ID> {
     required String table,
     required ID id,
   });
+
+  Future<void> dropTable({
+    required String table,
+  });
 }

@@ -70,4 +70,9 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
           (event) => event.map((dto) => fromJson(dto.data)).toList(),
         );
   }
+
+  @override
+  Future<void> dropTable() async {
+    await adapterDb.dropTable(table: tableName);
+  }
 }

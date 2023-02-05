@@ -44,16 +44,19 @@ class TaskItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
-      child: PhysicalModel(
-        color: Colors.white,
-        elevation: 3,
-        borderRadius: BorderRadius.circular(20),
-        child: GestureDetector(
-          onTap: () {
-            // onToDoChanged(todo);
-          },
+    return GestureDetector(
+      onTap: () {
+        // onToDoChanged(todo);
+        print('task.id');
+        print(task.id);
+      },
+      child: Container(
+        height: 80,
+        padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+        child: PhysicalModel(
+          color: Colors.white,
+          elevation: 3,
+          borderRadius: BorderRadius.circular(12),
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Row(

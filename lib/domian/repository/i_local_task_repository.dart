@@ -11,4 +11,6 @@ abstract class ILocalTaskRepository {
   Future<void> removeTaskFromDB(String id);
 
   Stream<List<Task>> readAllTask([List<CarbonQuery> queries = const []]);
+
+  Future<void> clearDB();
 }

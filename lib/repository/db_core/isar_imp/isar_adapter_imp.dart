@@ -208,4 +208,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
         );
     }
   }
+
+  @override
+  Future<void> dropTable({required String table}) async {}
 }

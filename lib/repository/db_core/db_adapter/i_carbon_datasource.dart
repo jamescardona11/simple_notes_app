@@ -26,5 +26,7 @@ abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
 
   Future<void> delete(String id);
 
+  Future<void> dropTable();
+
   T fromJson(Map<String, dynamic> json);
 }

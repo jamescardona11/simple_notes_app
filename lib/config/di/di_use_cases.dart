@@ -1,6 +1,5 @@
 import 'package:injectable/injectable.dart';
 import 'package:simple_notes_app/domian/domian.dart';
-import 'package:simple_notes_app/domian/use_cases/bulk_creation_task_use_case.dart';
 
 @module
 abstract class UseCasesModule {
@@ -28,6 +27,9 @@ abstract class UseCasesModule {
 
   @singleton
   BulkCreationTaskUseCase get bulkCreationTaskUseCase;
+
+  @singleton
+  ClearTaskDbUseCase get clearTaskDbUseCase;
 
   // - use cases
 }
