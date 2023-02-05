@@ -1,15 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:isar/isar.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 import '../db_core.dart';
 
-part 'isar_task_dto.g.dart';
+part 'isar_project_dto.g.dart';
 
-@JsonSerializable(explicitToJson: true)
 @collection
-class IsarTaskDTO extends BaseCarbonDTO {
-  Id? id = Isar.autoIncrement;
+class IsarProjectDTO extends BaseCarbonDTO {
+  // @JsonKey(includeToJson: true)
+  Id id = Isar.autoIncrement;
 
   // final String id;
   final String title;
@@ -17,7 +16,7 @@ class IsarTaskDTO extends BaseCarbonDTO {
   final bool isDeleted;
   final bool isDone;
 
-  IsarTaskDTO({
+  IsarProjectDTO({
     required this.id,
     required this.title,
     this.description = '',
@@ -25,7 +24,7 @@ class IsarTaskDTO extends BaseCarbonDTO {
     this.isDone = false,
   });
 
-  factory IsarTaskDTO.fromJson(Map<String, dynamic> data) => IsarTaskDTO(
+  factory IsarProjectDTO.fromJson(Map<String, dynamic> data) => IsarProjectDTO(
         id: int.tryParse(data['id'] as String) ?? -9223372036854775808,
         title: data['title'] as String,
         description: data['description'] as String? ?? '',

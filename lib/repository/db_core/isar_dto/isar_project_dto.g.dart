@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'isar_task_dto.dart';
+part of 'isar_project_dto.dart';
 
 // **************************************************************************
 // IsarCollectionGenerator
@@ -9,13 +9,13 @@ part of 'isar_task_dto.dart';
 // coverage:ignore-file
 // ignore_for_file: duplicate_ignore, non_constant_identifier_names, constant_identifier_names, invalid_use_of_protected_member, unnecessary_cast, prefer_const_constructors, lines_longer_than_80_chars, require_trailing_commas, inference_failure_on_function_invocation, unnecessary_parenthesis, unnecessary_raw_strings, unnecessary_null_checks, join_return_with_assignment, prefer_final_locals, avoid_js_rounded_ints, avoid_positional_boolean_parameters
 
-extension GetIsarTaskDTOCollection on Isar {
-  IsarCollection<IsarTaskDTO> get isarTaskDTOs => this.collection();
+extension GetIsarProjectDTOCollection on Isar {
+  IsarCollection<IsarProjectDTO> get isarProjectDTOs => this.collection();
 }
 
-const IsarTaskDTOSchema = CollectionSchema(
-  name: r'IsarTaskDTO',
-  id: 4903510597696418195,
+const IsarProjectDTOSchema = CollectionSchema(
+  name: r'IsarProjectDTO',
+  id: -4002354108878390354,
   properties: {
     r'dbID': PropertySchema(
       id: 0,
@@ -43,22 +43,22 @@ const IsarTaskDTOSchema = CollectionSchema(
       type: IsarType.string,
     )
   },
-  estimateSize: _isarTaskDTOEstimateSize,
-  serialize: _isarTaskDTOSerialize,
-  deserialize: _isarTaskDTODeserialize,
-  deserializeProp: _isarTaskDTODeserializeProp,
+  estimateSize: _isarProjectDTOEstimateSize,
+  serialize: _isarProjectDTOSerialize,
+  deserialize: _isarProjectDTODeserialize,
+  deserializeProp: _isarProjectDTODeserializeProp,
   idName: r'id',
   indexes: {},
   links: {},
   embeddedSchemas: {},
-  getId: _isarTaskDTOGetId,
-  getLinks: _isarTaskDTOGetLinks,
-  attach: _isarTaskDTOAttach,
+  getId: _isarProjectDTOGetId,
+  getLinks: _isarProjectDTOGetLinks,
+  attach: _isarProjectDTOAttach,
   version: '3.0.5',
 );
 
-int _isarTaskDTOEstimateSize(
-  IsarTaskDTO object,
+int _isarProjectDTOEstimateSize(
+  IsarProjectDTO object,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
@@ -74,8 +74,8 @@ int _isarTaskDTOEstimateSize(
   return bytesCount;
 }
 
-void _isarTaskDTOSerialize(
-  IsarTaskDTO object,
+void _isarProjectDTOSerialize(
+  IsarProjectDTO object,
   IsarWriter writer,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
@@ -87,13 +87,13 @@ void _isarTaskDTOSerialize(
   writer.writeString(offsets[4], object.title);
 }
 
-IsarTaskDTO _isarTaskDTODeserialize(
+IsarProjectDTO _isarProjectDTODeserialize(
   Id id,
   IsarReader reader,
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = IsarTaskDTO(
+  final object = IsarProjectDTO(
     description: reader.readStringOrNull(offsets[1]) ?? '',
     id: id,
     isDeleted: reader.readBoolOrNull(offsets[2]) ?? false,
@@ -103,7 +103,7 @@ IsarTaskDTO _isarTaskDTODeserialize(
   return object;
 }
 
-P _isarTaskDTODeserializeProp<P>(
+P _isarProjectDTODeserializeProp<P>(
   IsarReader reader,
   int propertyId,
   int offset,
@@ -125,31 +125,32 @@ P _isarTaskDTODeserializeProp<P>(
   }
 }
 
-Id _isarTaskDTOGetId(IsarTaskDTO object) {
-  return object.id ?? Isar.autoIncrement;
+Id _isarProjectDTOGetId(IsarProjectDTO object) {
+  return object.id;
 }
 
-List<IsarLinkBase<dynamic>> _isarTaskDTOGetLinks(IsarTaskDTO object) {
+List<IsarLinkBase<dynamic>> _isarProjectDTOGetLinks(IsarProjectDTO object) {
   return [];
 }
 
-void _isarTaskDTOAttach(
-    IsarCollection<dynamic> col, Id id, IsarTaskDTO object) {
+void _isarProjectDTOAttach(
+    IsarCollection<dynamic> col, Id id, IsarProjectDTO object) {
   object.id = id;
 }
 
-extension IsarTaskDTOQueryWhereSort
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QWhere> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhere> anyId() {
+extension IsarProjectDTOQueryWhereSort
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QWhere> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhere> anyId() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(const IdWhereClause.any());
     });
   }
 }
 
-extension IsarTaskDTOQueryWhere
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QWhereClause> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhereClause> idEqualTo(Id id) {
+extension IsarProjectDTOQueryWhere
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QWhereClause> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhereClause> idEqualTo(
+      Id id) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IdWhereClause.between(
         lower: id,
@@ -158,7 +159,7 @@ extension IsarTaskDTOQueryWhere
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhereClause> idNotEqualTo(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhereClause> idNotEqualTo(
       Id id) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
@@ -181,7 +182,8 @@ extension IsarTaskDTOQueryWhere
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhereClause> idGreaterThan(Id id,
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhereClause> idGreaterThan(
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -190,7 +192,8 @@ extension IsarTaskDTOQueryWhere
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhereClause> idLessThan(Id id,
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhereClause> idLessThan(
+      Id id,
       {bool include = false}) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
@@ -199,7 +202,7 @@ extension IsarTaskDTOQueryWhere
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterWhereClause> idBetween(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterWhereClause> idBetween(
     Id lowerId,
     Id upperId, {
     bool includeLower = true,
@@ -216,9 +219,10 @@ extension IsarTaskDTOQueryWhere
   }
 }
 
-extension IsarTaskDTOQueryFilter
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QFilterCondition> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDIsNull() {
+extension IsarProjectDTOQueryFilter
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QFilterCondition> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDIsNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNull(
         property: r'dbID',
@@ -226,7 +230,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       dbIDIsNotNull() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(const FilterCondition.isNotNull(
@@ -235,7 +239,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDEqualTo(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDEqualTo(
     String? value, {
     bool caseSensitive = true,
   }) {
@@ -248,7 +253,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDGreaterThan(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDGreaterThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -263,7 +269,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDLessThan(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDLessThan(
     String? value, {
     bool include = false,
     bool caseSensitive = true,
@@ -278,7 +285,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDBetween(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDBetween(
     String? lower,
     String? upper, {
     bool includeLower = true,
@@ -297,7 +305,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDStartsWith(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -310,7 +319,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDEndsWith(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -323,9 +333,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'dbID',
@@ -335,9 +344,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'dbID',
@@ -347,7 +355,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> dbIDIsEmpty() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      dbIDIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'dbID',
@@ -356,7 +365,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       dbIDIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -366,7 +375,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -380,7 +389,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionGreaterThan(
     String value, {
     bool include = false,
@@ -396,7 +405,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionLessThan(
     String value, {
     bool include = false,
@@ -412,7 +421,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionBetween(
     String lower,
     String upper, {
@@ -432,7 +441,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionStartsWith(
     String value, {
     bool caseSensitive = true,
@@ -446,7 +455,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionEndsWith(
     String value, {
     bool caseSensitive = true,
@@ -460,7 +469,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
@@ -471,7 +480,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
@@ -482,7 +491,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -492,7 +501,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       descriptionIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -502,24 +511,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'id',
-      ));
-    });
-  }
-
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idEqualTo(
-      Id? value) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition> idEqualTo(
+      Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'id',
@@ -528,8 +521,9 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idGreaterThan(
-    Id? value, {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      idGreaterThan(
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -541,8 +535,9 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idLessThan(
-    Id? value, {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      idLessThan(
+    Id value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -554,9 +549,9 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> idBetween(
-    Id? lower,
-    Id? upper, {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition> idBetween(
+    Id lower,
+    Id upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -571,7 +566,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       isDeletedEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -581,8 +576,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> isDoneEqualTo(
-      bool value) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      isDoneEqualTo(bool value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'isDone',
@@ -591,7 +586,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleEqualTo(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleEqualTo(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -604,7 +600,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       titleGreaterThan(
     String value, {
     bool include = false,
@@ -620,7 +616,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleLessThan(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleLessThan(
     String value, {
     bool include = false,
     bool caseSensitive = true,
@@ -635,7 +632,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleBetween(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleBetween(
     String lower,
     String upper, {
     bool includeLower = true,
@@ -654,7 +652,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleStartsWith(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleStartsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -667,7 +666,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleEndsWith(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleEndsWith(
     String value, {
     bool caseSensitive = true,
   }) {
@@ -680,9 +680,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleContains(
-      String value,
-      {bool caseSensitive = true}) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleContains(String value, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.contains(
         property: r'title',
@@ -692,9 +691,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleMatches(String pattern, {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.matches(
         property: r'title',
@@ -704,7 +702,8 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition> titleIsEmpty() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
+      titleIsEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'title',
@@ -713,7 +712,7 @@ extension IsarTaskDTOQueryFilter
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterFilterCondition>
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterFilterCondition>
       titleIsNotEmpty() {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
@@ -724,179 +723,188 @@ extension IsarTaskDTOQueryFilter
   }
 }
 
-extension IsarTaskDTOQueryObject
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QFilterCondition> {}
+extension IsarProjectDTOQueryObject
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QFilterCondition> {}
 
-extension IsarTaskDTOQueryLinks
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QFilterCondition> {}
+extension IsarProjectDTOQueryLinks
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QFilterCondition> {}
 
-extension IsarTaskDTOQuerySortBy
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QSortBy> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByDbID() {
+extension IsarProjectDTOQuerySortBy
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QSortBy> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByDbID() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dbID', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByDbIDDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByDbIDDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dbID', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByDescription() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      sortByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByDescriptionDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      sortByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByIsDeleted() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByIsDeleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDeleted', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByIsDeletedDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      sortByIsDeletedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDeleted', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByIsDone() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByIsDone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDone', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByIsDoneDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      sortByIsDoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDone', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByTitle() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> sortByTitleDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> sortByTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.desc);
     });
   }
 }
 
-extension IsarTaskDTOQuerySortThenBy
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QSortThenBy> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByDbID() {
+extension IsarProjectDTOQuerySortThenBy
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QSortThenBy> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByDbID() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dbID', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByDbIDDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByDbIDDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'dbID', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByDescription() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      thenByDescription() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByDescriptionDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      thenByDescriptionDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'description', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenById() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByIdDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByIdDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByIsDeleted() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByIsDeleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDeleted', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByIsDeletedDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      thenByIsDeletedDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDeleted', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByIsDone() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByIsDone() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDone', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByIsDoneDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy>
+      thenByIsDoneDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'isDone', Sort.desc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByTitle() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByTitle() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.asc);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QAfterSortBy> thenByTitleDesc() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QAfterSortBy> thenByTitleDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'title', Sort.desc);
     });
   }
 }
 
-extension IsarTaskDTOQueryWhereDistinct
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> {
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> distinctByDbID(
+extension IsarProjectDTOQueryWhereDistinct
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct> {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct> distinctByDbID(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'dbID', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> distinctByDescription(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct> distinctByDescription(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'description', caseSensitive: caseSensitive);
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> distinctByIsDeleted() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct>
+      distinctByIsDeleted() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isDeleted');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> distinctByIsDone() {
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct> distinctByIsDone() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'isDone');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, IsarTaskDTO, QDistinct> distinctByTitle(
+  QueryBuilder<IsarProjectDTO, IsarProjectDTO, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'title', caseSensitive: caseSensitive);
@@ -904,62 +912,41 @@ extension IsarTaskDTOQueryWhereDistinct
   }
 }
 
-extension IsarTaskDTOQueryProperty
-    on QueryBuilder<IsarTaskDTO, IsarTaskDTO, QQueryProperty> {
-  QueryBuilder<IsarTaskDTO, int, QQueryOperations> idProperty() {
+extension IsarProjectDTOQueryProperty
+    on QueryBuilder<IsarProjectDTO, IsarProjectDTO, QQueryProperty> {
+  QueryBuilder<IsarProjectDTO, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, String?, QQueryOperations> dbIDProperty() {
+  QueryBuilder<IsarProjectDTO, String?, QQueryOperations> dbIDProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'dbID');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, String, QQueryOperations> descriptionProperty() {
+  QueryBuilder<IsarProjectDTO, String, QQueryOperations> descriptionProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'description');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, bool, QQueryOperations> isDeletedProperty() {
+  QueryBuilder<IsarProjectDTO, bool, QQueryOperations> isDeletedProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isDeleted');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, bool, QQueryOperations> isDoneProperty() {
+  QueryBuilder<IsarProjectDTO, bool, QQueryOperations> isDoneProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'isDone');
     });
   }
 
-  QueryBuilder<IsarTaskDTO, String, QQueryOperations> titleProperty() {
+  QueryBuilder<IsarProjectDTO, String, QQueryOperations> titleProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'title');
     });
   }
 }
-
-// **************************************************************************
-// JsonSerializableGenerator
-// **************************************************************************
-
-IsarTaskDTO _$IsarTaskDTOFromJson(Map<String, dynamic> json) => IsarTaskDTO(
-      id: json['id'] as int?,
-      title: json['title'] as String,
-      description: json['description'] as String? ?? '',
-      isDeleted: json['isDeleted'] as bool? ?? false,
-      isDone: json['isDone'] as bool? ?? false,
-    );
-
-Map<String, dynamic> _$IsarTaskDTOToJson(IsarTaskDTO instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'isDeleted': instance.isDeleted,
-      'isDone': instance.isDone,
-    };

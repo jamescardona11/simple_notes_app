@@ -55,6 +55,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   // can I do with the DTO
   final _isarObjects = {
     'task_table': IsarTaskDTO.fromJson,
+    // 'other': IsarProjectDTO.fromJson,
   };
 
   IsarCollection? _getTableByString(String table) {
@@ -75,7 +76,9 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     final isarObj = _isarObjects[table]?.call(dao.data);
     if (isarObj == null) return;
 
-    return _db.writeTxn(() => collection!.put(isarObj));
+    return _db.writeTxn(
+      () => collection!.put(isarObj),
+    );
   }
 
   @override
@@ -140,12 +143,18 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     }
 
     // TODO
-    yield* collection!
+    final a = collection!
         .buildQuery(
           filter: filter,
         )
         .watch()
-        .map((event) => event.map((element) => AdapterDAO(data: (element as BaseCarbonDTO).toJson())));
+        .map((event) => event.map(
+              (element) => AdapterDAO(
+                data: (element as BaseCarbonDTO).toJson(),
+              ),
+            ));
+
+    yield* a;
   }
 
   @override

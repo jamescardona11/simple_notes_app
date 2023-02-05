@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:simple_notes_app/domian/models/tasks_model.dart';
+import 'package:uuid/uuid.dart';
 
 import '../db_core/db_core.dart';
 
@@ -43,5 +44,5 @@ class TaskDto extends BaseCarbonDTO {
   Map<String, dynamic> toJson() => _$TaskDtoToJson(this);
 
   @override
-  String? get dbID => id;
+  String? get dbID => id.isEmpty ? const Uuid().v4() : id;
 }
