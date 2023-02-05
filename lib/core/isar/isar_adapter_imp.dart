@@ -13,7 +13,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   static Completer<IsarAdapterImp>? _completer;
 
   static Future<IsarAdapterImp> initAdapter({
-    String name = 'sembast_default_name',
+    String name = 'isar_default_name.db',
   }) async {
     if (_completer == null) {
       final Completer<IsarAdapterImp> completer = Completer<IsarAdapterImp>();

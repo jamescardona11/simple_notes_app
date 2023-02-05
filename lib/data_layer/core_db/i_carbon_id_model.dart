@@ -7,5 +7,3 @@ abstract class BaseCarbonIdModel {
   /// this method is used to convert data to json, then save json in db
   Map<String, dynamic> toJson();
 }
-
-abstract class SembastCarbonIdModel extends BaseCarbonIdModel {}

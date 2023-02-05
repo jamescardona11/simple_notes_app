@@ -27,7 +27,7 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
   static bool get wasInitCalled => _sembast != null;
 
   static Future<SembastAdapterImp> initAdapter({
-    String name = 'sembast_default_name',
+    String name = 'sembast_default_name.db',
     int version = 1,
   }) async {
     if (_completer == null) {
@@ -63,10 +63,10 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     return _completer!.future;
   }
 
-  static Future<String> _getDBPathWithName(String path) async {
+  static Future<String> _getDBPathWithName(String name) async {
     var dir = await getApplicationDocumentsDirectory();
     await dir.create(recursive: true);
-    return dir.path + path;
+    return '${dir.path}/$name';
   }
 
   Future<void> closeDatabase() => _db.close();

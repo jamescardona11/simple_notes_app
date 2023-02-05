@@ -48,6 +48,7 @@ class _IsarDatabasePageState extends State<IsarDatabasePage> {
               autocorrect: false,
               controller: _controllerNote,
             ),
+            const SizedBox(height: 15),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
