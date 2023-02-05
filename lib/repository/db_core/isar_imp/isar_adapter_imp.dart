@@ -1,9 +1,8 @@
 import 'dart:async';
 
-import 'package:simple_notes_app/core/db_core.dart';
 import 'package:isar/isar.dart';
 
-import 'isar_dao/notes_dao.dart';
+import '../db_core.dart';
 
 class IsarAdapterImp implements ICarbonAdapter<int> {
   IsarAdapterImp._(this._db);
@@ -22,9 +21,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
         if (Isar.instanceNames.isEmpty) {
           dbInstance = await Isar.open(
             name: name,
-            [
-              IsarNotesDAOSchema,
-            ],
+            [],
             inspector: true,
           );
 
@@ -55,12 +52,12 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   // how to improve this identifier for objects
   // can I do with the DTO
   final _isarObjects = {
-    'notes': IsarNotesDAO.fromMap,
+    // 'notes': IsarNotesDAO.fromMap,
   };
 
   IsarCollection? getTableByString(String table) {
     if (table == 'notes') {
-      return _db.isarNotesDAOs;
+      // return _db.isarNotesDAOs;
     }
 
     throw Exception('The type is not supported');
@@ -146,7 +143,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
           filter: filter,
         )
         .watch()
-        .map((event) => event.map((element) => AdapterDAO(data: (element as BaseInternalDAO).toJson())));
+        .map((event) => event.map((element) => AdapterDAO(data: (element as BaseCarbonDTO).toJson())));
   }
 
   @override

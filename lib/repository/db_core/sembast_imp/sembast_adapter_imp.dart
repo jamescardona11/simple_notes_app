@@ -1,11 +1,13 @@
+
 import 'dart:async';
 
-import 'package:simple_notes_app/core/db_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
 import 'package:sembast_web/sembast_web.dart';
+
+import '../db_core.dart';
 
 class SembastAdapterImp implements ICarbonAdapter<String> {
   SembastAdapterImp._(this._db);

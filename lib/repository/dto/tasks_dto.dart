@@ -1,17 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:simple_notes_app/models/tasks_model.dart';
+import 'package:simple_notes_app/domian/models/tasks_model.dart';
+
+import '../db_core/db_core.dart';
 
 part 'tasks_dto.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class TaskDto {
+class TaskDto extends BaseCarbonDTO {
   final String title;
   final String description;
   final bool isDeleted;
   final bool isDone;
   final String id;
 
-  const TaskDto({
+  TaskDto({
     required this.id,
     required this.title,
     this.description = '',
@@ -37,5 +39,9 @@ class TaskDto {
         isDone: isDone,
       );
 
+  @override
   Map<String, dynamic> toJson() => _$TaskDtoToJson(this);
+
+  @override
+  String? get dbID => id;
 }

@@ -1,8 +1,6 @@
-import 'package:simple_notes_app/core/db_core.dart';
+import 'db_core.dart';
 
-import 'i_carbon_id_model.dart';
-
-mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbonIdModel> implements ICarbonDataSource<T> {
+mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbonDTO> implements ICarbonDataSource<T> {
   A get adapterDb;
 
   @override

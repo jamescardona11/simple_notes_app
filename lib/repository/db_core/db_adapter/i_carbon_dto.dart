@@ -1,4 +1,4 @@
-abstract class BaseCarbonIdModel {
+abstract class BaseCarbonDTO {
   /// id to used in database
   /// Null for Isar because Isar has the inner id implementation
   /// Non-null for Sembast because Sembast needs a unique id

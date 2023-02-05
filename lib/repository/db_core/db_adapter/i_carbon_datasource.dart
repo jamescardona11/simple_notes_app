@@ -1,14 +1,13 @@
-import 'package:simple_notes_app/old/data_layer/core_db/i_carbon_id_model.dart';
-
+import 'i_carbon_dto.dart';
 import 'query_filter.dart';
 
 /// adapter to convert inner class request to external request
 /// Represents the `client interface` in Adapter Pattern diagram
 /// https://refactoring.guru/es/design-patterns/adapter
 
-typedef FromJson<T> = T Function(Map<String, dynamic> json);
+// typedef FromJson<T> = T Function(Map<String, dynamic> json);
 
-abstract class ICarbonDataSource<T extends BaseCarbonIdModel> {
+abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
   String get tableName;
 
   Future<void> create(T dto);

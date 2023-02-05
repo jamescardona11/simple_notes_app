@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simple_notes_app/blocs/bloc_exports.dart';
 
-import '../../models/tasks_model.dart';
+import '../../domian/models/tasks_model.dart';
 
 void showModalBox(BuildContext context) {
   TextEditingController titleController = TextEditingController();

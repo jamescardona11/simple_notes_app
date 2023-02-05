@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simple_notes_app/blocs/bloc_exports.dart';
-import 'package:simple_notes_app/models/tasks_model.dart';
+import 'package:simple_notes_app/domian/models/tasks_model.dart';
 import 'package:simple_notes_app/ui/ui.dart';
 
 class TasksView extends StatelessWidget {
