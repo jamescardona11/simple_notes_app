@@ -25,6 +25,7 @@ class DeletedTaskView extends StatelessWidget {
               ),
               TasksListWidget(
                 tasks: removedTasks,
+                showRecovery: true,
               ),
             ],
           ),

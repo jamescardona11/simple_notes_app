@@ -13,7 +13,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<Widget> pageList = [];
   int indexPage = 0;
+
+  @override
+  void initState() {
+    pageList.addAll([
+      TasksView(onDrawerItemTap: onDrawerItemTap),
+      DeletedTaskView(),
+      CompletedTaskView(),
+    ]);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,11 +57,6 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  final pageList = [
-    TasksView(),
-    DeletedTaskView(),
-  ];
 
   void onDrawerItemTap(int index) {
     if (index == indexPage) return;

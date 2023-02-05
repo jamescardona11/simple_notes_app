@@ -1,13 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:simple_notes_app/cubit/cubit_exports.dart';
 import 'package:simple_notes_app/domian/models/tasks_model.dart';
 import 'package:simple_notes_app/ui/ui.dart';
-import 'package:simple_notes_app/ui/widgets/tasks_list.dart';
 
 class TasksView extends StatelessWidget {
   const TasksView({
     Key? key,
+    required this.onDrawerItemTap,
   }) : super(key: key);
+
+  final ValueChanged<int> onDrawerItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,9 @@ class TasksView extends StatelessWidget {
                     child: StatCard(
                       color: Colors.amber,
                       label: 'Completed Tasks',
+                      onTap: () {
+                        onDrawerItemTap.call(2);
+                      },
                     ),
                   ),
                   Expanded(

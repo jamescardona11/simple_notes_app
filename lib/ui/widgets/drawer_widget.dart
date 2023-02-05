@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:simple_notes_app/cubit/cubit_exports.dart';
 
 class MyDrawer extends StatelessWidget {
@@ -30,7 +31,15 @@ class MyDrawer extends StatelessWidget {
                   Scaffold.of(context).closeDrawer();
                   onDrawerItemTap.call(0);
                 },
-                leading: const Icon(Icons.create_new_folder),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      FontAwesomeIcons.listCheck,
+                      size: 18,
+                    ),
+                  ],
+                ),
                 trailing: Text(state.allTasks.length.toString()),
                 title: const Text("My Tasks"),
               ),
@@ -39,10 +48,35 @@ class MyDrawer extends StatelessWidget {
                   Scaffold.of(context).closeDrawer();
                   onDrawerItemTap.call(1);
                 },
-                leading: const Icon(Icons.delete),
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      FontAwesomeIcons.trash,
+                      size: 18,
+                    ),
+                  ],
+                ),
                 trailing: Text(state.removedTasks.length.toString()),
                 title: const Text("Deleted task"),
-              )
+              ),
+              ListTile(
+                onTap: () {
+                  Scaffold.of(context).closeDrawer();
+                  onDrawerItemTap.call(2);
+                },
+                leading: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      FontAwesomeIcons.check,
+                      size: 18,
+                    ),
+                  ],
+                ),
+                trailing: Text(state.statsModel.completedTask.toString()),
+                title: const Text("Completed task"),
+              ),
             ],
           ),
         ),

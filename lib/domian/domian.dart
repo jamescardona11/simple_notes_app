@@ -5,6 +5,8 @@ export 'models/tasks_model.dart';
 export 'repository/i_local_task_repository.dart';
 export 'use_cases/create_task_use_case.dart';
 export 'use_cases/read_all_task_use_case.dart';
+export 'use_cases/read_deleted_task_use_case.dart';
+export 'use_cases/read_last_completed_task_use_case.dart';
 export 'use_cases/read_stats_use_case.dart';
 export 'use_cases/remove_task_use_case.dart';
 export 'use_cases/update_task_use_case.dart';

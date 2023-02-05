@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:equatable/equatable.dart';
 import 'package:simple_notes_app/domian/domian.dart';
-import 'package:simple_notes_app/domian/use_cases/read_deleted_task_use_case.dart';
 
 import '../cubit_exports.dart';
 
@@ -16,6 +15,7 @@ class TasksCubit extends Cubit<TasksState> {
     this._readAllTaskUseCase,
     this._readStatsUseCase,
     this._readDeletedTaskUseCase,
+    this._readLastCompletedTaskUseCase,
   ) : super(const TasksState()) {
     print('Init Task Cubit');
 
@@ -28,6 +28,7 @@ class TasksCubit extends Cubit<TasksState> {
   final ReadAllTaskUseCase _readAllTaskUseCase;
   final ReadStatsUseCase _readStatsUseCase;
   final ReadDeletedTaskUseCase _readDeletedTaskUseCase;
+  final ReadLastCompletedTaskUseCase _readLastCompletedTaskUseCase;
 
   StreamSubscription<List<Task>>? _streamTasksSubscription;
   StreamSubscription<List<Task>>? _streamDeletedTasksSubscription;
@@ -58,6 +59,14 @@ class TasksCubit extends Cubit<TasksState> {
 
   Future<void> removeTask(String id) async {
     await _removeTaskUseCase.call(id);
+  }
+
+  Future<void> readCompletedTask() async {
+    final items = await _readLastCompletedTaskUseCase.call(
+      state.completedTaskPagination,
+    );
+
+    emit(state.copyWith(completedTask: items, completedTaskPagination: items.length));
   }
 
   Future<void> _initStreamListeners() async {
