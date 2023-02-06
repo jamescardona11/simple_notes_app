@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/foundation.dart';
+import 'package:uuid/uuid.dart';
 
 class AdapterDAO {
   AdapterDAO({
@@ -9,16 +11,26 @@ class AdapterDAO {
   final String? id;
   final Map<String, dynamic> data;
 
-  Map<String, dynamic> formatData() {
-    String? id = data['id'];
-    if (id == null || id.isEmpty) {
-      final temp = Map<String, dynamic>.from(data);
-      temp['id'] = this.id;
+  AdapterDAO formatData() {
+    final id = _recordId();
+    return AdapterDAO(
+      id: id,
+      data: _formatData(id),
+    );
+  }
 
-      return temp;
+  Map<String, dynamic> _formatData(String recordId) {
+    final temp = Map<String, dynamic>.from(data);
+    temp['id'] = recordId;
+
+    return temp;
+  }
+
+  String _recordId() {
+    if (id == null || id!.isEmpty) {
+      return const Uuid().v4();
     }
-
-    return data;
+    return id!;
   }
 
   @override

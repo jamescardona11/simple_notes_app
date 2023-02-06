@@ -30,7 +30,12 @@ class LocalTaskRepository extends ILocalTaskRepository with CarbonSingleDataSour
   TaskDto fromJson(Map<String, dynamic> json) => TaskDto.fromJson(json);
 
   @override
-  Future<void> bulkCreationTaskInDB(List<Task> tasks) => createMany(tasks.map((e) => TaskDto.fromEntity(e)));
+  Future<void> bulkCreationTaskInDB(List<Task> tasks) async {
+    // for (var t in tasks) {
+    //   create(TaskDto.fromEntity(t));
+    // }
+    await createMany(tasks.map((e) => TaskDto.fromEntity(e)));
+  }
 
   @override
   Future<void> clearDB() => dropTable();

@@ -78,9 +78,11 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     required AdapterDAO dao,
   }) async {
     final store = _sembastStore(table);
-    await store.record(dao.id!).add(
+
+    final formatData = dao.formatData();
+    await store.record(formatData.id!).add(
           _db,
-          dao.formatData(),
+          formatData.data,
         );
   }
 
@@ -88,14 +90,15 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
   Future<void> createMany({
     required String table,
     required Iterable<AdapterDAO> daoList,
-  }) {
-    return _db.transaction((transaction) async {
-      final store = _sembastStore(table);
-      await store.records(daoList.map((item) => item.id!)).put(
-            transaction,
-            daoList.map((item) => item.formatData()).toList(),
-            merge: true,
-          );
+  }) async {
+    final store = _sembastStore(table);
+    final formatData = daoList.map((e) => e.formatData()).toList();
+
+    await _db.transaction((transaction) async {
+      final ids = formatData.map((item) => item.id!).toList();
+      final keys = formatData.map((item) => item.data).toList();
+
+      await store.records(ids).add(transaction, keys);
     });
   }
 
@@ -105,10 +108,10 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     required AdapterDAO dao,
   }) async {
     final store = _sembastStore(table);
-
-    await store.record(dao.id!).put(
+    final formatData = dao.formatData();
+    await store.record(formatData.id!).put(
           _db,
-          dao.data,
+          formatData.data,
           merge: true,
         );
   }
@@ -119,10 +122,13 @@ class SembastAdapterImp implements ICarbonAdapter<String> {
     required Iterable<AdapterDAO> daoList,
   }) async {
     final store = _sembastStore(table);
+    final formatData = daoList.map((e) => e.formatData());
     await _db.transaction((transaction) async {
-      await store.records(daoList.map((item) => item.id!)).put(
+      final ids = formatData.map((item) => item.id!).toList();
+      final keys = formatData.map((item) => item.data).toList();
+      await store.records(ids).put(
             _db,
-            daoList.map((item) => item.data).toList(),
+            keys,
             merge: true,
           );
     });

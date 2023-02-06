@@ -65,7 +65,7 @@ class TaskItem extends StatelessWidget {
                   value: task.isDone,
                   onChanged: task.isDeleted == false
                       ? (value) {
-                          context.read<TasksCubit>().completeTask(task);
+                          context.read<TasksCubit>().markAsCompletedTask(task);
                         }
                       : null,
                 ),
@@ -82,7 +82,9 @@ class TaskItem extends StatelessWidget {
                   _ActionIconWidget(
                     color: Theme.of(context).primaryColor,
                     icon: FontAwesomeIcons.arrowsRotate,
-                    onTap: () async {},
+                    onTap: () async {
+                      context.read<TasksCubit>().unarchiveTask(task);
+                    },
                   ),
                 _ActionIconWidget(
                   color: Colors.red,
@@ -120,7 +122,7 @@ class TaskItem extends StatelessWidget {
     required BuildContext ctx,
     required Task task,
   }) {
-    task.isDeleted ? ctx.read<TasksCubit>().removeTask(task.id) : ctx.read<TasksCubit>().deleteTask(task.id);
+    task.isDeleted ? ctx.read<TasksCubit>().removeTask(task.id) : ctx.read<TasksCubit>().markAsDeletedTask(task.id);
     Navigator.pop(ctx);
   }
 }

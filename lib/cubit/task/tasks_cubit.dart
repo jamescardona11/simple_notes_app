@@ -52,12 +52,16 @@ class TasksCubit extends Cubit<TasksState> {
     await _createTaskUseCase.call(task);
   }
 
-  Future<void> completeTask(Task task) async {
+  Future<void> unarchiveTask(Task task) async {
+    await _updateTaskUseCase.call(task.copyWith(isDeleted: false));
+  }
+
+  Future<void> markAsCompletedTask(Task task) async {
     await _updateTaskUseCase.call(task.copyWith(isDone: true));
   }
 
   // archive task - delete temporary
-  Future<void> deleteTask(String id) async {
+  Future<void> markAsDeletedTask(String id) async {
     final task = state.allTasks.firstWhere((element) => element.id == id);
     await _updateTaskUseCase.call(task.copyWith(isDeleted: true));
   }
@@ -93,6 +97,13 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   Future<void> clearTaskDB() async {
+    emit(state.copyWith(
+      allTasks: [],
+      completedTask: [],
+      completedTaskPagination: 0,
+      removedTasks: [],
+      statsModel: null,
+    ));
     await _clearTaskDbUseCase.call();
   }
 
