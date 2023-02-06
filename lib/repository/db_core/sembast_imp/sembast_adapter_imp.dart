@@ -8,7 +8,7 @@ import 'package:sembast_web/sembast_web.dart';
 
 import '../db_core.dart';
 
-class SembastAdapterImp implements ICarbonAdapter<String> {
+class SembastAdapterImp implements ICarbonAdapter {
   SembastAdapterImp._(this._db);
 
   final Database _db;

@@ -30,19 +30,18 @@ Future<_i1.GetIt> init(
   final repositoryModule = _$RepositoryModule();
   final useCasesModule = _$UseCasesModule(getIt);
   final cubitModule = _$CubitModule(getIt);
-  await gh.singletonAsync<_i3.ICarbonAdapter<dynamic>>(
+  await gh.singletonAsync<_i3.ICarbonAdapter>(
     () => repositoryModule.isarDBApp,
     instanceName: 'Isar',
     preResolve: true,
   );
-  await gh.singletonAsync<_i3.ICarbonAdapter<dynamic>>(
+  await gh.singletonAsync<_i3.ICarbonAdapter>(
     () => repositoryModule.sembastDBApp,
     instanceName: 'Sembast',
     preResolve: true,
   );
-  gh.lazySingleton<_i4.ILocalTaskRepository>(() =>
-      repositoryModule.taskRepository(
-          gh<_i3.ICarbonAdapter<dynamic>>(instanceName: 'Sembast')));
+  gh.lazySingleton<_i4.ILocalTaskRepository>(() => repositoryModule
+      .taskRepository(gh<_i3.ICarbonAdapter>(instanceName: 'Isar')));
   gh.singleton<_i4.ReadAllTaskUseCase>(useCasesModule.readAllTask);
   gh.singleton<_i4.ReadDeletedTaskUseCase>(
       useCasesModule.readDeletedTaskUseCase);

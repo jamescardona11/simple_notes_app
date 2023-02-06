@@ -5,7 +5,7 @@ import 'package:simple_notes_app/repository/db_core/isar_dto/isar_task_dto.dart'
 
 import '../db_core.dart';
 
-class IsarAdapterImp implements ICarbonAdapter<int> {
+class IsarAdapterImp implements ICarbonAdapter {
   IsarAdapterImp._(this._db);
 
   final Isar _db;
@@ -97,20 +97,26 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
   @override
   Future<void> delete({
     required String table,
-    required int id,
+    required String id,
   }) async {
+    final recordId = int.tryParse(id);
+    if (recordId == null) return;
+
     final collection = _getTableByString(table);
-    return _db.writeTxn(() => collection!.delete(id));
+    return _db.writeTxn(() => collection!.delete(recordId));
   }
 
   @override
   Stream<AdapterDAO?> read({
     required String table,
-    required int id,
+    required String id,
   }) async* {
+    final recordId = int.tryParse(id);
+    if (recordId == null) return;
+
     final collection = _getTableByString(table);
 
-    final element = await collection!.get(id);
+    final element = await collection!.get(recordId);
     if (element == null) {
       yield null;
     } else {
@@ -131,21 +137,27 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     final collection = _getTableByString(table);
 
     FilterCondition? filter;
+    int? limit;
+    List<SortProperty> sort = [];
     for (CarbonQuery query in carbonQueries) {
       if (query is LimitCarbonQuery) {
-        // TODO
+        limit = query.limit;
       } else if (query is SortCarbonQuery) {
-        // TODO
+        sort.add(SortProperty(
+          property: query.property,
+          sort: query.ascending ? Sort.asc : Sort.desc,
+        ));
       } else if (query is FilteringCarbonQuery) {
         // only take the last
         filter = _getFilterFromClause(query);
       }
     }
 
-    // TODO
-    final a = collection!
+    final query = collection!
         .buildQuery(
           filter: filter,
+          limit: limit,
+          sortBy: sort,
         )
         .watch(fireImmediately: true)
         .map((event) => event.map(
@@ -154,7 +166,7 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
               ),
             ));
 
-    yield* a;
+    yield* query;
   }
 
   @override
@@ -170,6 +182,13 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
     required Iterable<AdapterDAO> daoList,
   }) =>
       createMany(table: table, daoList: daoList);
+
+  @override
+  Future<void> dropTable({required String table}) async {
+    final collection = _getTableByString(table);
+
+    return _db.writeTxn(() => collection!.clear());
+  }
 
   FilterCondition _getFilterFromClause(FilteringCarbonQuery filtering) {
     switch (filtering.comparator) {
@@ -208,7 +227,4 @@ class IsarAdapterImp implements ICarbonAdapter<int> {
         );
     }
   }
-
-  @override
-  Future<void> dropTable({required String table}) async {}
 }

@@ -7,7 +7,7 @@ import 'query_filter.dart';
 ///
 ///
 
-abstract class ICarbonAdapter<ID> {
+abstract class ICarbonAdapter {
   Future<void> create({
     required String table,
     required AdapterDAO dao,
@@ -20,7 +20,7 @@ abstract class ICarbonAdapter<ID> {
 
   Stream<AdapterDAO?> read({
     required String table,
-    required ID id,
+    required String id,
   });
 
   Stream<Iterable<AdapterDAO>> readWhere({
@@ -40,7 +40,7 @@ abstract class ICarbonAdapter<ID> {
 
   Future<void> delete({
     required String table,
-    required ID id,
+    required String id,
   });
 
   Future<void> dropTable({
