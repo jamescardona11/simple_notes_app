@@ -1,10 +1,10 @@
 import 'package:simple_notes_app/domian/domian.dart';
 
-class ReadStatsUseCase {
+class WatchStatsUseCase {
   final ILocalTaskRepository repository;
-  final ReadAllTaskUseCase readAllTask;
+  final WatchAllTaskUseCase readAllTask;
 
-  ReadStatsUseCase(
+  WatchStatsUseCase(
     this.repository,
     this.readAllTask,
   );

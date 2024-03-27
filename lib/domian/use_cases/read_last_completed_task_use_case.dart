@@ -7,7 +7,7 @@ class ReadLastCompletedTaskUseCase {
   ReadLastCompletedTaskUseCase(this.repository);
 
   Future<List<Task>> call([int take = 10]) async {
-    final items = await repository.readAllTask([
+    final items = await repository.watch([
       LimitCarbonQuery(take),
       FilteringCarbonQuery(
         comparator: FilteringType.equalTo,

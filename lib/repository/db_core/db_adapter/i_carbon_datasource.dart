@@ -16,7 +16,7 @@ abstract class ICarbonDataSource<T extends BaseCarbonDTO> {
 
   Stream<T?> read(String id);
 
-  Stream<List<T>> readWhere({
+  Stream<List<T>> watchAll({
     List<CarbonQuery> carbonQueries = const [],
   });
 

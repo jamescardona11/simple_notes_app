@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:simple_notes_app/repository/db_core/isar_dto/isar_task_dto.dart';
 
 import '../db_core.dart';
@@ -18,13 +19,16 @@ class IsarAdapterImp implements ICarbonAdapter {
   }) async {
     if (_completer == null) {
       final Completer<IsarAdapterImp> completer = Completer<IsarAdapterImp>();
+
       try {
         late Isar? dbInstance;
+        var dir = await getApplicationDocumentsDirectory();
         if (Isar.instanceNames.isEmpty) {
           dbInstance = await Isar.open(
             name: name,
             schemas,
             inspector: true,
+            directory: dir.path,
           );
 
           // completer.complete(IsarAdapterImp._(dbInstance));
@@ -107,7 +111,7 @@ class IsarAdapterImp implements ICarbonAdapter {
   }
 
   @override
-  Stream<AdapterDAO?> read({
+  Stream<AdapterDAO?> watchOne({
     required String table,
     required String id,
   }) async* {
@@ -130,7 +134,7 @@ class IsarAdapterImp implements ICarbonAdapter {
   // https://github.com/isar/isar/blob/eb170c6244fa52667fc610b1db4464123f7b2663/packages/isar/lib/src/web/isar_collection_impl.dart
   // https://github.com/isar/isar/blob/eb170c6244fa52667fc610b1db4464123f7b2663/packages/isar/lib/src/web/query_build.dart
   @override
-  Stream<Iterable<AdapterDAO>> readWhere({
+  Stream<Iterable<AdapterDAO>> watch({
     required String table,
     Iterable<CarbonQuery> carbonQueries = const [],
   }) async* {

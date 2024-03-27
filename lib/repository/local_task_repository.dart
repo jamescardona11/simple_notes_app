@@ -1,10 +1,24 @@
+import 'dart:async';
+
+import 'package:rxdart/rxdart.dart';
 import 'package:simple_notes_app/domian/domian.dart';
 import 'package:simple_notes_app/repository/dto/tasks_dto.dart';
 
 import 'db_core/db_core.dart';
 
 class LocalTaskRepository extends ILocalTaskRepository with CarbonSingleDataSourceMixin<ICarbonAdapter, TaskDto> {
-  LocalTaskRepository(this.adapterDb);
+  LocalTaskRepository(this.adapterDb) {
+    _init();
+  }
+
+  final _taskController = BehaviorSubject<List<Task>>.seeded([]);
+  StreamSubscription<List<Task>>? _streamTasksSubscription;
+
+  void _init() {
+    _streamTasksSubscription = watch().listen((tasks) {
+      _taskController.add(tasks);
+    });
+  }
 
   @override
   final ICarbonAdapter adapterDb;
@@ -22,7 +36,7 @@ class LocalTaskRepository extends ILocalTaskRepository with CarbonSingleDataSour
   Future<void> removeTaskFromDB(String id) => delete(id);
 
   @override
-  Stream<List<Task>> readAllTask([List<CarbonQuery> queries = const []]) => readWhere(carbonQueries: queries).map(
+  Stream<List<Task>> watch([List<CarbonQuery> queries = const []]) => watchAll(carbonQueries: queries).map(
         (dtoList) => dtoList.map((dto) => dto.toEntity()).toList(),
       );
 
@@ -31,12 +45,15 @@ class LocalTaskRepository extends ILocalTaskRepository with CarbonSingleDataSour
 
   @override
   Future<void> bulkCreationTaskInDB(List<Task> tasks) async {
-    // for (var t in tasks) {
-    //   create(TaskDto.fromEntity(t));
-    // }
     await createMany(tasks.map((e) => TaskDto.fromEntity(e)));
   }
 
   @override
   Future<void> clearDB() => dropTable();
+
+  @override
+  Future<void> dispose() async {
+    _taskController.close();
+    _streamTasksSubscription?.cancel();
+  }
 }

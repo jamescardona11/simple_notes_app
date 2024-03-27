@@ -15,7 +15,10 @@ class _CompletedTaskViewState extends State<CompletedTaskView> {
   @override
   void initState() {
     print('Init completed task view');
-    context.read<TasksCubit>().readCompletedTask();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<TasksCubit>().readCompletedTask();
+    });
 
     super.initState();
   }

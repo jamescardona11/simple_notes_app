@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:simple_notes_app/domian/domian.dart';
 
 @module
 abstract class UseCasesModule {
   // Task use cases
-  @singleton
-  ReadAllTaskUseCase get readAllTask;
+  @Singleton(dispose: disposeProvider)
+  WatchAllTaskUseCase get watchAllTask;
 
   @singleton
-  ReadStatsUseCase get readStats;
+  WatchStatsUseCase get watchStats;
 
   @singleton
   CreateTaskUseCase get createTask;
@@ -20,7 +22,7 @@ abstract class UseCasesModule {
   RemoveTaskUseCase get removeTask;
 
   @singleton
-  ReadDeletedTaskUseCase get readDeletedTaskUseCase;
+  WatchDeletedTaskUseCase get watchDeletedTaskUseCase;
 
   @singleton
   ReadLastCompletedTaskUseCase get readLastCompletedTaskUseCase;
@@ -30,6 +32,8 @@ abstract class UseCasesModule {
 
   @singleton
   ClearTaskDbUseCase get clearTaskDbUseCase;
+}
 
-  // - use cases
+FutureOr<void> disposeProvider(WatchAllTaskUseCase provider) {
+  provider.dispose();
 }

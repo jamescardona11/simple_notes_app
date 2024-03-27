@@ -18,12 +18,12 @@ abstract class ICarbonAdapter {
     required Iterable<AdapterDAO> daoList,
   });
 
-  Stream<AdapterDAO?> read({
+  Stream<AdapterDAO?> watchOne({
     required String table,
     required String id,
   });
 
-  Stream<Iterable<AdapterDAO>> readWhere({
+  Stream<Iterable<AdapterDAO>> watch({
     required String table,
     Iterable<CarbonQuery> carbonQueries = const [],
   });

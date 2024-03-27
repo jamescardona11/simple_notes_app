@@ -46,7 +46,7 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
       );
 
   @override
-  Stream<T?> read(String id) => adapterDb.read(table: tableName, id: id).map((dto) {
+  Stream<T?> read(String id) => adapterDb.watchOne(table: tableName, id: id).map((dto) {
         if (dto != null) {
           try {
             return fromJson(dto.data);
@@ -58,11 +58,11 @@ mixin CarbonSingleDataSourceMixin<A extends ICarbonAdapter, T extends BaseCarbon
       });
 
   @override
-  Stream<List<T>> readWhere({
+  Stream<List<T>> watchAll({
     List<CarbonQuery> carbonQueries = const [],
   }) {
     return adapterDb
-        .readWhere(
+        .watch(
           table: tableName,
           carbonQueries: carbonQueries,
         )

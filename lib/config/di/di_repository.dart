@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:injectable/injectable.dart';
 import 'package:simple_notes_app/domian/domian.dart';
 import 'package:simple_notes_app/repository/db_core/db_core.dart';
@@ -27,6 +29,10 @@ abstract class RepositoryModule {
     );
   }
 
-  @LazySingleton(as: ILocalTaskRepository)
+  @LazySingleton(as: ILocalTaskRepository, dispose: disposeProvider)
   LocalTaskRepository taskRepository(@Named('Isar') ICarbonAdapter adapterDb) => LocalTaskRepository(adapterDb);
+}
+
+FutureOr<void> disposeProvider(ILocalTaskRepository provider) {
+  unawaited(provider.dispose());
 }

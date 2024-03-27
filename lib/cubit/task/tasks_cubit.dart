@@ -13,8 +13,8 @@ class TasksCubit extends Cubit<TasksState> {
     this._createTaskUseCase,
     this._updateTaskUseCase,
     this._removeTaskUseCase,
-    this._readAllTaskUseCase,
-    this._readStatsUseCase,
+    this._watchAllTaskUseCase,
+    this._watchStatsUseCase,
     this._readDeletedTaskUseCase,
     this._readLastCompletedTaskUseCase,
     this._bulkCreationTaskUseCase,
@@ -28,9 +28,9 @@ class TasksCubit extends Cubit<TasksState> {
   final CreateTaskUseCase _createTaskUseCase;
   final UpdateTaskUseCase _updateTaskUseCase;
   final RemoveTaskUseCase _removeTaskUseCase;
-  final ReadAllTaskUseCase _readAllTaskUseCase;
-  final ReadStatsUseCase _readStatsUseCase;
-  final ReadDeletedTaskUseCase _readDeletedTaskUseCase;
+  final WatchAllTaskUseCase _watchAllTaskUseCase;
+  final WatchStatsUseCase _watchStatsUseCase;
+  final WatchDeletedTaskUseCase _readDeletedTaskUseCase;
   final ReadLastCompletedTaskUseCase _readLastCompletedTaskUseCase;
   final BulkCreationTaskUseCase _bulkCreationTaskUseCase;
   final ClearTaskDbUseCase _clearTaskDbUseCase;
@@ -108,7 +108,7 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   Future<void> _initStreamListeners() async {
-    _streamTasksSubscription = _readAllTaskUseCase.call().listen((tasks) {
+    _streamTasksSubscription = _watchAllTaskUseCase.call().listen((tasks) {
       emit(state.copyWith(
         allTasks: tasks.where((element) => !element.isDeleted && !element.isDone).toList(),
       ));
@@ -122,7 +122,7 @@ class TasksCubit extends Cubit<TasksState> {
       ));
     });
 
-    _streamStatsSubscription = _readStatsUseCase.call().listen((stat) {
+    _streamStatsSubscription = _watchStatsUseCase.call().listen((stat) {
       emit(state.copyWith(statsModel: stat));
     });
   }
